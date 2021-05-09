@@ -1,67 +1,146 @@
 // out: ../css/styles.css
 
-*, *::after ,*::before {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
 $info: #1DC103;
 $base: #fff;
 $off: #ddb9a9;
 @mixin optional-at-root($sel) {
     @at-root #{if(not &, $sel, selector-append(&, $sel))} {
-      @content;
+        @content;
     }
-  }
-  
-  @mixin placeholder {
+}
+
+@mixin placeholder {
     @include optional-at-root('::-webkit-input-placeholder') {
-      @content;
+        @content;
     }
-  
+    
     @include optional-at-root(':-moz-placeholder') {
-      @content;
+        @content;
     }
-  
+    
     @include optional-at-root('::-moz-placeholder') {
       @content;
     }
-  
+    
     @include optional-at-root(':-ms-input-placeholder') {
-      @content;
+        @content;
     }
-  }
+}
+*, *::after ,*::before {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+* {
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+       
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+       
+      &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+      }
+}
+
+
+html {
+    scroll-behavior: smooth;
+  }  
 body {
     background: $base;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+
+
 }
 
 
 header {
     padding: 5px;
     width: 100%;
-    background: $info;
-    margin-bottom: 30px;
+    background: rgb(77, 195, 132);
     img {
         width: 50px;
         height: auto;
-        margin-right: 15px;
+        margin-right: 5px;
     }
     h1 {
         font-size: 26px;
-        font-weight: 600;
+        font-weight: 500;
         display: inline-block;
         margin: 0;
         color: #fff;
+    }
+    @media (max-width: 640px) {
+        img {
+            width: 32px;
+        }
+        h1{
+            font-size: 18px;
+        }
     }
 }
 
 .container{
     width: 100%;
-    max-width: 700px;
+    max-width: 500px;
     margin: auto;
     padding: 0  15px;
+}
+.container-fluid {
+    max-width: 1170px;
+    width: 100%;
+    padding: 0 15px;
+    text-align: center;
+    @media (min-width: 640px) {
+        text-align: left;
+        align-items: center;
+        display: flex;
+        flex: 1;
+    }
+}
+
+.col {
+    padding: 0 15px;
+    flex: 1;
+}
+
+.main {
+    overflow-y: auto;
+    padding: 30px 0;
+    .container{
+        min-height: calc(100vh - 165px);
+    }
+}
+
+.hero-section{
+    background: rgb(176, 238, 205);
+    padding: 30px 0;
+    color: #3b3b3b;
+    .hero-img-cnt{
+        text-align: center;
+        @media (min-width: 640px) {
+            justify-content: flex-end;
+            display: flex;
+        }
+    }
+    .hero-img {
+        width: 160px;
+        @media (min-width: 640px) {
+            width: 260px;
+        }
+    }
+}
+
+.center{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
 }
 
 .flex-center {
@@ -75,6 +154,24 @@ header {
 .text-danger {
     color: rgb(250, 66, 66);
 }
+
+
+footer {
+    background: rgb(141, 212, 173);
+    padding:  15px;
+    align-items: center;
+    text-align: center;
+    color: rgb(46, 43, 43);
+    a{
+        color:rgb(12, 90, 47) ;
+        display: inline-block;
+        font-weight: 400;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
 
 .input-control {
     display: block;
@@ -145,13 +242,14 @@ label {
         }
         &:disabled + label{
             opacity: 0.7;
+            overflow: hidden;
             span:after {
                 content: '';
                 position: absolute;
                 left: 0;
                 right: 0;
                 top: 50%;
-                transform: translateY(-50%);
+                transform: translateY(-50%) rotate(10deg);
                 height: 2px;
                 background: #aaaeb3;
                 z-index: 2;
@@ -331,11 +429,4 @@ label {
 
 
 
-
-footer {
-    background: #e2e2e2;
-    padding: 20px;
-    margin-top: 30px;
-    align-items: center;
-}
 

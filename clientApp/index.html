@@ -18,83 +18,106 @@
 </head>
 <body>
     <header>
-        <div class="container flex-center">
+        <div class="container  flex-center">
             <img class="logo" src="./assets/images/logo-tr.png" alt="">
             <h1>Vaccine Bell</h1>
         </div>
     </header>
 
-    <div class="container">
-        <div id="register-form" >
-            <div class="form-group">
-                <label for="email">Name <span class="text-danger">*</span></label>
-                <input type="text" class="input-control" name="name" id="name">
-            </div>
-            <div class="form-group">
-                <label for="emailid">Email ID <span class="text-danger">*</span></label>
-                <input type="email" class="input-control" name="emailid" id="emailid">
-            </div>
-            <div class="form-group">
-                <label for="mobile">Mobile Number</label>
-                <input type="number" class="input-control" name="mobile" id="mobile">
-            </div>
-
-            <div id="notification-options">
-                <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
-                <div class="toggle">
-                    <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
-                    <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
+    <div class="main">
+        <div class="container ">
+            <div id="register-form" >
+                <div class="form-group">
+                    <label for="emailid">Email ID <span class="text-danger">*</span></label>
+                    <input type="email" class="input-control" name="emailid" id="emailid">
                 </div>
-                <div class="toggle">
-                    <input disabled name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
-                    <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
-                </div>   
-                <div class="toggle">
-                    <input disabled name="notification" id="email" value="email" class="toggle-btn" type="checkbox">
-                    <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="number" class="input-control" name="mobile" id="mobile">
                 </div>
-            </div>
 
-            <div id="location">
-                <!-- States -->
-                <div class="form-group">
-                    <label>State <span class="text-danger">*</span></label>
-                    <select class="input-control"  name="state" id="state">
-                        <option selected disabled >Select Your State</option>
-                    </select>
-                </div> <!-- States -->
-
-                <!-- districts -->
-                <div class="form-group">
-                    <label>Districts <span class="text-danger">*</span></label>
-                    <div id="districts" class="combox">
-                        <div class="combox-selection"></div>
-                        <input autocomplete="off" type="text" class="combox-control">
-                        <ul class="combox-dropdown"></ul>
+                <div id="notification-options">
+                    <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
+                    <div class="toggle">
+                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
+                        <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
                     </div>
-                </div> <!-- districts -->
-
-
-                <!-- Hospitals -->
-                <div class="form-group">
-                    <label>Hospitals</label>
-                    <div id="hospitals" class="combox">
-                        <div class="combox-selection"></div>
-                        <input autocomplete="off" type="text" class="combox-control">
-                        <ul class="combox-dropdown"></ul>
+                    <div class="toggle">
+                        <input disabled name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
+                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
+                    </div>   
+                    <div class="toggle">
+                        <input disabled name="notification" id="email" value="email" class="toggle-btn" type="checkbox">
+                        <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
                     </div>
-                </div> <!-- Hospitals -->
+                </div>
+
+                <div id="location">
+                    <!-- States -->
+                    <div class="form-group">
+                        <label>State <span class="text-danger">*</span></label>
+                        <select class="input-control"  name="state" id="state">
+                            <option selected disabled >Select Your State</option>
+                        </select>
+                    </div> <!-- States -->
+
+                    <!-- districts -->
+                    <div class="form-group">
+                        <label>Districts <span class="text-danger">*</span></label>
+                        <div id="districts" class="combox">
+                            <div class="combox-selection"></div>
+                            <input autocomplete="off" type="text" class="combox-control">
+                            <ul class="combox-dropdown"></ul>
+                        </div>
+                    </div> <!-- districts -->
+
+
+                    <!-- Hospitals -->
+                    <div class="form-group">
+                        <label>Hospitals</label>
+                        <div id="hospitals" class="combox">
+                            <div class="combox-selection"></div>
+                            <input autocomplete="off" type="text" class="combox-control">
+                            <ul class="combox-dropdown"></ul>
+                        </div>
+                    </div> <!-- Hospitals -->
+                </div>
+
+
+                <p>Please fill <span class="text-danger">*</span> mandatory fields</p>
+
+                <button class="btn" id="register" disabled> Register </button>
             </div>
-
-
-            <p>Please fill <span class="text-danger">*</span> mandatory fields</p>
-
-            <button class="btn" id="register" disabled> Register </button>
         </div>
     </div>
 
+
+    <section class="hero-section">
+        <div class="container-fluid">
+            <div class="col hero-img-cnt">
+                <img class="hero-img" src="./assets/images/vaccination.png" alt="">
+            </div>
+            <div class="col">
+                <div class="hero-text">
+                    <p>COVID-19 can have serious, life-threatening complications, and there is no way to know how COVID-19 will affect you. And if you get sick, you could spread the disease to friends, family, and others around you.
+                    </p>
+                    <p>
+                        Clinical trials for all vaccines must first show they are safe and effective before any vaccine can be authorized or approved for use, including COVID-19 vaccines. The known and potential benefits of a COVID-19 vaccine must outweigh the known and potential risks of the vaccine before it is used under what is known as an Emergency Use Authorization (EUA). Watch a video explaining an EUA.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
     <footer>
-        
+        👨‍💻  by 
+        <a target="_blank" href="https://vineethtrv.github.io/">Vineeth TR</a>
+        &
+        <a target="_blank"  href="">Nijin</a>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./assets/js/app.js"></script>

@@ -116,7 +116,6 @@ function getHospital(district) {
 
 
 function validate(){
-   let validName =  $('#name').val()? true : false;
    let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
    let validEmail =  $('#emailid').val() && emailRegex.test($('#emailid').val())? true : false;
    let validState =  $('#state').val()? true : false;
@@ -130,7 +129,7 @@ function validate(){
 
 
 
-   if(validName && validEmail && validState && validDistricts && validNotificationCheck){
+   if(validEmail && validState && validDistricts && validNotificationCheck){
     registerBtn.removeAttribute('disabled')
    } else {
     registerBtn.setAttribute('disabled' , true)
@@ -138,10 +137,7 @@ function validate(){
 }
 
 
-// Name
-$('#name').on('keyup', function(){
-    validate();
-})
+
 
 // emailid
 $('#emailid').on('keyup', function(){
@@ -149,6 +145,7 @@ $('#emailid').on('keyup', function(){
     let validEmail =  $('#emailid').val() && emailRegex.test($('#emailid').val())? true : false;
     if(!validEmail){
         email.setAttribute('disabled' , true);
+        $('#email').attr('checked' , false);
     } else{
         email.removeAttribute('disabled');
         $('#email').attr('checked' , true);
@@ -186,13 +183,12 @@ registerBtn.onclick = (e)=> {
     });
 
     let dateForm = {
-        name: $('#name').val(),
-        emailid: $('#emailid').val(),
-        mobile: $('#mobile').val(),
-        notification,
-        selctedState,
-        selctedDistricts,
-        selctedHospitals,
+        email: $('#emailid').val(),
+        phone: $('#mobile').val(),
+        notificationChannels:notification,
+        state: selctedState,
+        districts:selctedDistricts,
+        hospitals:selctedHospitals,
     }
     console.log(dateForm)
 }
