@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import * as env from "dotenv";
 env.config();
-const { EMAIL, PASS } = process.env;
+const { EMAIL, PASS, SUBJECT } = process.env;
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -17,9 +17,9 @@ const transporter = nodemailer.createTransport({
 export function sendMail(message, email) {
   console.log(EMAIL, PASS);
   let mailOptions = {
-    from: "your.gmail.account@gmail.com",
+    from: EMAIL,
     to: email,
-    subject: "VACCINE AVAILABILITY",
+    subject: SUBJECT,
     text: message,
   };
 
