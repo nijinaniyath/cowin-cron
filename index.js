@@ -28,7 +28,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(limiter);
 
-const job = scheduler.scheduleJob({ second: 10 }, function () {
+const job = scheduler.scheduleJob({ second: 120 }, function () {
   console.log("STARTED...");
   procesSessionData();
 });

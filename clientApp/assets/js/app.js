@@ -2,8 +2,8 @@
 
 const stateAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
 const districtAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
-const HospitalAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict";
-
+const hospitalAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict";
+const registerAPI = "http://localhost:3001/users"
 
 const stateControl = document.querySelector('#state');
 let states = [];
@@ -90,7 +90,7 @@ function getHospital(district) {
     let mm = d.getMonth() + 1;
     let MM = mm <= 9? '0' + mm: mm;
     let YYY = d.getFullYear();
-    API_URL = `${HospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}` 
+    API_URL = `${hospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}` 
 
     $.get(API_URL , function( hospitalData ) {
         hospitals.push(...hospitalData.centers);
@@ -190,7 +190,11 @@ registerBtn.onclick = (e)=> {
         districts:selctedDistricts,
         hospitals:selctedHospitals,
     }
-    console.log(dateForm)
+    registerAPI
+    
+    $.post( registerAPI, dateForm ).done(function( data ) {
+        console.log( "Data Loaded: " + data );
+      });
 }
 
 
