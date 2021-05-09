@@ -4,7 +4,6 @@ const stateAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
 const districtAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
 const hospitalAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict";
 const registerAPI = "http://localhost:3001/users"
-
 const stateControl = document.querySelector('#state');
 let states = [];
 let selctedState;
@@ -12,6 +11,8 @@ let selctedState;
 const districtCombox = document.querySelector('#districts');
 const hospitalCombox = document.querySelector('#hospitals');
 const registerBtn = document.getElementById('register')
+const emailControl = document.getElementById('emailid')
+const mobileControl = document.getElementById('mobile')
 
 let districts = [];
 let selctedDistricts = [];
@@ -23,11 +24,17 @@ getAllStates();
 
 // Populate All states in india
 function getAllStates(){
-    $.get(stateAPI , function( stateData ) {
+    fetch(stateAPI)
+    .then(response => response.json())
+    .then(stateData => {
         states = stateData.states;
         states.forEach(state => {
-            $('#state').append(`<option value="${state.state_id}"> ${state.state_name}</option>`)
+            let option = document.createElement("option");
+            option.text = state.state_name;
+            option.value = state.state_id;
+            stateControl.appendChild(option);
         })
+
     });
 }
 // State selection
@@ -36,8 +43,8 @@ stateControl.addEventListener('input', (e)=> {
     hospitals = [];
     selctedHospitals = [];
     districts = [];
-    $('#hospitals .combox-selection').html('');
-    $('#hospitals .combox-dropdown').html('');
+    document.querySelector('#hospitals .combox-selection').innerHTML = '';
+    document.querySelector('#hospitals .combox-dropdown').innerHTML = '';
     getDistrictsById(selctedState);
     validate();
 });
@@ -51,7 +58,10 @@ stateControl.addEventListener('input', (e)=> {
  * */ 
 
 function getDistrictsById(id){
-    $.get(districtAPI + id , function( districtsData ) {
+
+    fetch(districtAPI + id)
+    .then(response => response.json())
+    .then(districtsData => {
         districts = districtsData.districts;
         if(districts && districts.length){
             // combox config
@@ -92,7 +102,10 @@ function getHospital(district) {
     let YYY = d.getFullYear();
     API_URL = `${hospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}` 
 
-    $.get(API_URL , function( hospitalData ) {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(hospitalData => {
+
         hospitals.push(...hospitalData.centers);
 
         if(hospitals && hospitals.length){
@@ -117,13 +130,14 @@ function getHospital(district) {
 
 function validate(){
    let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-   let validEmail =  $('#emailid').val() && emailRegex.test($('#emailid').val())? true : false;
-   let validState =  $('#state').val()? true : false;
+   let validEmail =  emailControl.value && emailRegex.test(emailControl.value)? true : false;
+   let validState =  stateControl.value? true : false;
    let validDistricts =  selctedDistricts.length > 0 ? true : false;
    let notification = [];
-   $("input[name='notification']:checked").each(function(){
-       notification.push($(this).val());
-   });
+    document.querySelectorAll("input[name='notification']:checked").forEach(el => {
+        
+        notification.push(el.value);
+    })
    let validNotificationCheck = notification.length > 0 ? true : false;
 
 
@@ -140,61 +154,67 @@ function validate(){
 
 
 // emailid
-$('#emailid').on('keyup', function(){
+emailControl.onkeyup = ()=> {
     let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    let validEmail =  $('#emailid').val() && emailRegex.test($('#emailid').val())? true : false;
+    let validEmail =  emailControl.value && emailRegex.test(emailControl.value)? true : false;
+    let emailCh = document.getElementById('email');
     if(!validEmail){
         email.setAttribute('disabled' , true);
-        $('#email').attr('checked' , false);
+        emailCh.checked = false;
     } else{
         email.removeAttribute('disabled');
-        $('#email').attr('checked' , true);
-        
+        emailCh.checked = true;
     }
     validate();
-})
+}
 
 // Mobile 
-$('#mobile').on('keyup', function(){
+mobileControl.onkeyup = ()=> {
     let phoneno = /^\d{10}$/;
-    let validPhone = phoneno.test($(this).val());
+    let validPhone = phoneno.test(mobileControl.value);
     let sms = document.getElementById('sms');
     let whatsapp =  document.getElementById('whatsapp');
     if(!validPhone){
         sms.setAttribute('disabled' , true);
+        sms.checked = false;
         whatsapp.setAttribute('disabled' , true);
+        whatsapp.checked = false;
     } else{
         sms.removeAttribute('disabled');
         whatsapp.removeAttribute('disabled');
     }
-})
+}
 // Notification options
-$("input[name='notification']").on('click', function(){
-    validate();
-});
+document.querySelectorAll("input[name='notification']").forEach(channel => {
+    channel.addEventListener('click' , validate)
+})
 
 
 // Registert
 registerBtn.onclick = (e)=> {
 
     let notification = [];
-    $("input[name='notification']:checked").each(function(){
-        notification.push($(this).val());
-    });
+    document.querySelectorAll("input[name='notification']:checked").forEach(el => {
+        notification.push(el.value);
+    })
 
     let dateForm = {
-        email: $('#emailid').val(),
-        phone: $('#mobile').val(),
+        email:emailControl.value,
+        phone: mobileControl.value,
         notificationChannels:notification,
-        state: selctedState,
         districts:selctedDistricts,
         hospitals:selctedHospitals,
-    }
-    registerAPI
+    }  
     
-    $.post( registerAPI, dateForm ).done(function( data ) {
-        console.log( "Data Loaded: " + data );
-      });
+    fetch(registerAPI, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dateForm)
+        }).then(res => res.json())
+        .then(res => console.log(res));
 }
 
 
