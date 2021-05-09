@@ -5,8 +5,6 @@ import { getAllDistricts, findUsersByDistrict } from "./model.service.js";
 
 import * as env from "dotenv";
 env.config();
-
-const registeredDistricts = [512, 600, 735];
 const config = {
   headers: {
     "User-Agent":
@@ -59,20 +57,15 @@ async function findUsersByCity(district_id) {
 }
 
 async function findAvailabilityForUser(user, centers) {
-  const avaialabilityMap = {};
-  console.log(user, " user");
-  if (!user.hospitals && !user.hospitals.length) {
-    // const avaialabilityMap = getAvailabilityMap(centers);
+  if (!user.hospitals || !user.hospitals.length) {
+    const avaialabilityMap = getAvailabilityMap(
+      centers.map((center) => center.center_id),
+      centers
+    );
     notifyUser(user, avaialabilityMap);
     return;
   }
-  for (let centerId of user.hospitals) {
-    // const availabilities = getAvailabilities(centerId, centers);
-    // if (availabilities?.length) {
-    //   avaialabilityMap[centerId] = availabilities;
-    // }
-  }
-
+  const avaialabilityMap = getAvailabilityMap(user.hospitals, centers);
   notifyUser(user, avaialabilityMap);
 }
 
@@ -90,10 +83,13 @@ function notifyUser(user, avaialabilityMap) {
 
 const sleep = async (ms) => new Promise((res) => setTimeout(res, ms));
 
-function getAvailabilityMap(centers) {
+function getAvailabilityMap(userPreference, centers) {
   let avaialabilityMap = {};
-  for (let centerId of centers) {
-    const availabilities = getAvailabilities(centerId, centers);
+  for (let centerId of userPreference) {
+    const center = centers.find((center) => center.center_id === centerId);
+    const availabilities = center?.sessions.filter(
+      (center) => center.available_capacity > 0
+    );
     if (availabilities?.length) {
       avaialabilityMap[centerId] = availabilities;
     }
