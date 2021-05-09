@@ -18,7 +18,7 @@ export async function getAllDistricts() {
   return DistrictModel.find();
 }
 
-export function addDistrictsIfNotExist({ districts }) {
+export function addDistrictsIfNotExists({ districts }) {
   for (let district of districts) {
     addDistrictIfnotExist(district);
   }
