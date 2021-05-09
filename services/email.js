@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import * as env from "dotenv";
 env.config();
 const { EMAIL, PASS, SUBJECT } = process.env;
-
+//TODO: change authentication to app password
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export function sendMail(message, email) {
-  console.log(EMAIL, PASS);
+  //TODO: html template support
   let mailOptions = {
     from: EMAIL,
     to: email,
