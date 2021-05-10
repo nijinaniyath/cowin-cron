@@ -57,45 +57,56 @@ async function findUsersByCity(district_id) {
 }
 
 async function findAvailabilityForUser(user, centers) {
+  console.log(user.email, "EMAIL");
   const userSelectedCenters = centers
     .filter((center) => user.hospitals?.includes(center.center_id))
     .map((center) => center.center_id);
   if (!userSelectedCenters || !userSelectedCenters.length) {
-    const avaialabilityMap = getAvailabilityMap(
+    const avaialabilityMap = getAvailableCenters(
       centers.map((center) => center.center_id),
       centers
     );
-    notifyUser(user, avaialabilityMap);
+    notifyUser({ user, ...avaialabilityMap });
     return;
   }
-  const avaialabilityMap = getAvailabilityMap(userSelectedCenters, centers);
-  notifyUser(user, avaialabilityMap);
+  const avaialabilityMap = getAvailableCenters(userSelectedCenters, centers);
+  notifyUser({ user, ...avaialabilityMap });
 }
 
-function notifyUser(user, avaialabilityMap) {
-  console.log("NOTIFY USERS");
-  if (!Object.keys(avaialabilityMap).length) {
+function notifyUser({ user, centers, dates }) {
+  console.log("NOTIFY USERS", dates);
+  if (!centers.length) {
     return;
   }
   for (let channel of user.notificationChannels) {
     const notifier = notifications[channel];
-    const message = notifier.createMessage();
-    // TODO: send notification
+    notifier.sendMessage({ dates, centers, user, getSessionByDate });
   }
 }
 
 const sleep = async (ms) => new Promise((res) => setTimeout(res, ms));
 
-function getAvailabilityMap(userPreference, centers) {
-  let avaialabilityMap = {};
+function getAvailableCenters(userPreference, centers) {
+  let avaiableCenters = [];
+  let uniqueDates = [];
   for (let centerId of userPreference) {
     const center = centers.find((center) => center.center_id === centerId);
     const availabilities = center?.sessions.filter(
-      (center) => center.available_capacity > 0
+      (session) => session.available_capacity > 0
     );
     if (availabilities?.length) {
-      avaialabilityMap[centerId] = availabilities;
+      const availableDates = availabilities
+        .filter((session) => !uniqueDates.includes(session.date))
+        .map((session) => session.date);
+      uniqueDates = [...uniqueDates, ...availableDates];
+      avaiableCenters = [...avaiableCenters, center];
     }
   }
-  return avaialabilityMap;
+  return { centers: avaiableCenters, dates: uniqueDates.sort() };
+}
+
+function getSessionByDate({ date, center }) {
+  const session = center?.sessions?.filter((session) => session.date === date);
+  console.log("SESSION:", session);
+  return session || {};
 }

@@ -1,0 +1,117 @@
+- var title = 'Vaccine Available';
+- var message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.';
+//- Template 
+doctype transitional
+head
+  meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+  title Vaccine Bell
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  style(type="text/css").
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+    }
+table(
+  role="presentation",
+  border="0",
+  cellpadding="0",
+  cellspacing="0",
+  width="100%"
+)
+  tr
+    td(style="padding: 20px 0 30px 0")
+      table(
+        align="center",
+        border="0",
+        cellpadding="0",
+        cellspacing="0",
+        width="600",
+        style="border-collapse: collapse; border: 1px solid #b0eecd"
+      )
+        tr
+          td(align="center", bgcolor="#4dc384", style="padding: 30px 0 30px 0")
+            h1(
+              style="color: #ffffff; font-family: Arial, sans-serif; font-size: 32px; line-height: 24px; margin: 0"
+            ) &#x1F514; Vaccine Bell
+        tr
+          td(bgcolor="#ffffff", style="padding: 30px 20px")
+            table(
+              border="0",
+              cellpadding="0",
+              cellspacing="0",
+              width="100%",
+              style="border-collapse: collapse"
+            )
+              tr
+                td(style="color: #153643; font-family: Arial, sans-serif")
+                  //-   Title                    
+                  h1(style="font-size: 24px; margin: 0")= title
+              tr
+                td(
+                  style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0"
+                )
+                  //- Message
+                  p(style="margin: 0")= message
+              tr
+                td
+                  table(
+                    border="0",
+                    cellpadding="0",
+                    cellspacing="0",
+                    width="100%",
+                    style="border-collapse: collapse"
+                  )
+                    tr
+                      th(
+                        bgcolor="#b0eecd",
+                        width="150",
+                        style="color: #153643; font-family: Arial, sans-serif; border: 1px solid #b2dfdb; padding: 3px"
+                      ) Centers
+
+                      //- Dates
+                      each date in dates
+                        th(
+                          bgcolor="#ccf7e0",
+                          style="color: #153643; font-family: Arial, sans-serif; border: 1px solid #b2dfdb; padding: 3px"
+                        )= date
+
+                    // table body
+                    each center in centers
+                      tr
+                        td(
+                          style="color: #153643; font-family: Arial, sans-serif; border: 1px solid #b2dfdb; font-size: 12px; padding: 3px"
+                        )= center.name
+                        //sessions
+                        each date in dates
+                          td(
+                            style="color: #153643; font-family: Arial, sans-serif; border: 1px solid #b2dfdb; font-size: 12px; padding: 3px; text-align: center; vertical-align: top"
+                          )
+                            - var session = getSessionByDate({center,date})
+                            if session.available_capacity
+                              span(style="color: #388e3c")= session.available_capacity
+                              p(style="margin: 0; font-size: 10px")= session.vaccine
+                              if center.fee_type 
+                                span(
+                                  style="background: #d50000; color: #ffffff; font-size: 10px"
+                                )= center.fee_type 
+        tr
+          td(style="text-align: center; padding: 0 30px 20px") 
+            a(
+              href="https://www.cowin.gov.in/home",
+              target='_blank',
+              style="color: #2e2b2b; font-family: Arial, sans-serif; font-size: 16px; text-align: center; font-weight: bold; text-decoration: none; display: inline-block; background: #ffca28; padding: 15px 100px"
+            ) Book Vaccine
+        tr
+          td(bgcolor="#8dd4ad", style="padding: 20px 20px")
+            table(
+              border="0",
+              cellpadding="0",
+              cellspacing="0",
+              width="100%",
+              style="border-collapse: collapse"
+            )
+              tr
+                td(
+                  style="color: #2e2b2b; font-family: Arial, sans-serif; font-size: 16px; text-align: center"
+                )
+                  a(href="#", style="color: #2e2b2b; font-weight: bold") Unsubscribe
+                  | to this notification instantly
