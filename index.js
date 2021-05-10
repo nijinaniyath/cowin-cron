@@ -1,10 +1,9 @@
 import express from "express";
-import scheduler from "node-schedule";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";
 import { ValidationError } from "express-validation";
-
+import { CronJob } from "cron";
 import * as env from "dotenv";
 env.config();
 
@@ -13,7 +12,7 @@ import router from "./routes/index.js";
 import { procesSessionData } from "./services/service.js";
 import { HTTP_STATUS_CODE } from "./constants/constants.js";
 
-const port = process.env.PORT || 3000;
+const { PORT, SCHEDULER_INTERVAL } = process.env;
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -29,11 +28,12 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(limiter);
-
-const job = scheduler.scheduleJob({ second: 120 }, function () {
+const job = new CronJob(SCHEDULER_INTERVAL, function () {
   console.log("STARTED...");
   procesSessionData();
 });
+
+job.start();
 
 app.use(express.static("public"));
 app.use("/api", router);
@@ -46,6 +46,6 @@ app.use((err, req, res, next) => {
   return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json(err);
 });
 
-app.listen(port, () => {
-  console.log(`server running on port ${port}`);
+app.listen(PORT || 3000, () => {
+  console.log(`server running on port ${PORT || 3000}`);
 });
