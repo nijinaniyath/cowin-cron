@@ -132,7 +132,7 @@ function validate() {
   let validState = stateControl.value ? true : false;
   let validDistricts = selctedDistricts.length > 0 ? true : false;
   let notification = [];
-  document.querySelector(".error-badge").classList.remove('show');
+  document.querySelector(".error-badge").classList.remove("show");
 
   document
     .querySelectorAll("input[name='notification']:checked")
@@ -191,7 +191,7 @@ registerBtn.onclick = (e) => {
   let errorBadge = document.querySelector(".error-badge");
   let errorMessage = document.querySelector("#error-message");
   let notification = [];
-  errorBadge.classList.remove('show');
+  errorBadge.classList.remove("show");
   // Show waiting
   register.classList.add("show-loading");
   // Disable further action
@@ -219,24 +219,22 @@ registerBtn.onclick = (e) => {
     },
     body: JSON.stringify(dateForm),
   })
-    .then((res) => {
-
-      if(!res.ok) {
-        throw new Error(res.message);
+    .then(async (res) => {
+      if (!res.ok) {
+        throw await res.json();
       }
-      return res.json()
-    
+      return res.json();
     })
     .then((res) => {
       alert.classList.add("show");
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
-      errorMessage.innerText = err.message;
-      errorBadge.classList.add('show');
+      errorMessage.innerText = err?.message || err;
+      errorBadge.classList.add("show");
       registerBtn.removeAttribute("disabled");
       register.classList.remove("show-loading");
-    })
-    ;
+    });
 };
 
 /**
