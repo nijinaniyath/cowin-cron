@@ -1,7 +1,6 @@
 import express from "express";
 import scheduler from "node-schedule";
 import helmet from "helmet";
-import cors from "cors";
 import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";
 import { ValidationError } from "express-validation";
