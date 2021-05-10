@@ -10,7 +10,7 @@ export async function findUserByEmail({ email }) {
 }
 
 export async function findUsersByDistrict(dtId) {
-  return UserModel.find({ districts: [dtId] });
+  return UserModel.find({ districts: dtId });
 }
 
 export async function getAllDistricts() {

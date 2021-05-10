@@ -1,6 +1,6 @@
 import axios from "axios";
 import dateformat from "dateformat";
-import { NOTIFIERS, notifications } from "./notifier.js";
+import { notifications } from "./notifier.js";
 import { getAllDistricts, findUsersByDistrict } from "./model.service.js";
 
 import * as env from "dotenv";
@@ -57,7 +57,10 @@ async function findUsersByCity(district_id) {
 }
 
 async function findAvailabilityForUser(user, centers) {
-  if (!user.hospitals || !user.hospitals.length) {
+  const userSelectedCenters = centers
+    .filter((center) => user.hospitals?.includes(center.center_id))
+    .map((center) => center.center_id);
+  if (!userSelectedCenters || !userSelectedCenters.length) {
     const avaialabilityMap = getAvailabilityMap(
       centers.map((center) => center.center_id),
       centers
@@ -65,19 +68,19 @@ async function findAvailabilityForUser(user, centers) {
     notifyUser(user, avaialabilityMap);
     return;
   }
-  const avaialabilityMap = getAvailabilityMap(user.hospitals, centers);
+  const avaialabilityMap = getAvailabilityMap(userSelectedCenters, centers);
   notifyUser(user, avaialabilityMap);
 }
 
 function notifyUser(user, avaialabilityMap) {
-  console.log("NOTIFY USERS", avaialabilityMap);
+  console.log("NOTIFY USERS");
   if (!Object.keys(avaialabilityMap).length) {
     return;
   }
   for (let channel of user.notificationChannels) {
     const notifier = notifications[channel];
     const message = notifier.createMessage();
-    //notifier.sendMessage({ message, user });
+    // TODO: send notification
   }
 }
 
@@ -96,30 +99,3 @@ function getAvailabilityMap(userPreference, centers) {
   }
   return avaialabilityMap;
 }
-
-//ignore
-
-// export async function getStates() {
-//   console.log("state,,");
-//   const res = await axios.get(STATES_ENDPOINT, config);
-//   const states = res.data;
-//   return states;
-// }
-
-// async function getAllDistricts(states) {
-//   console.log(`GET ALL DISTRICTS: `);
-//   let allDistricts = [];
-//   for await (const { districts } of states.map((state) =>
-//     fetchDistricts(state?.state_id)
-//   )) {
-//     allDistricts = [...allDistricts, ...districts];
-//   }
-//   fireAllSessionDataRequest(allDistricts);
-// }
-
-// async function fetchDistricts(state) {
-//   console.log("fetching district...");
-//   const response = await axios.get(`${DISTRICT_ENDPOINT}/${state}`, config);
-//   const districts = response.data;
-//   return districts;
-// }
