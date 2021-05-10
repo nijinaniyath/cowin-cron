@@ -106,7 +106,7 @@ function getAvailableCenters(userPreference, centers) {
 }
 
 function getSessionByDate({ date, center }) {
-  const session = center?.sessions?.filter((session) => session.date === date);
+  const session = center?.sessions?.find((session) => session.date === date);
   console.log("SESSION:", session);
   return session || {};
 }
