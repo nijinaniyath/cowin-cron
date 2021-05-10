@@ -56,9 +56,11 @@
                     <!-- States -->
                     <div class="form-group">
                         <label>State <span class="text-danger">*</span></label>
-                        <select class="input-control"  name="state" id="state">
-                            <option selected disabled >Select Your State</option>
-                        </select>
+                        <div class="select-box">
+                            <select class="input-control"  name="state" id="state">
+                                <option selected disabled>Select Your State</option>
+                            </select>
+                        </div>
                     </div> <!-- States -->
 
                     <!-- districts -->
@@ -86,29 +88,35 @@
 
                 <p>Please fill <span class="text-danger">*</span> mandatory fields</p>
 
-                <button class="btn" id="register" disabled> Register </button>
+                <button class="btn" id="register" disabled> 
+                    Register<span class="loading">ing</span>
+                </button>
             </div>
+
+
+            <!-- Success alert-->
+            <div class="alert">
+                <span class="icon-done"></span>
+                <h2> Registered successfully </h2>
+                <p>
+                    You will be notified based on your registration
+                </p>
+            </div>
+            <!-- Success alert-->
+
+
         </div>
     </div>
 
 
     <section class="hero-section">
-        <div class="container-fluid">
-            <div class="col hero-img-cnt">
+            <div class="hero-img-cnt">
                 <img class="hero-img" src="./assets/images/vaccination.png" alt="">
             </div>
-            <div class="col">
-                <div class="hero-text">
-                    <p>COVID-19 can have serious, life-threatening complications, and there is no way to know how COVID-19 will affect you. And if you get sick, you could spread the disease to friends, family, and others around you.
-                    </p>
-                    <p>
-                        Clinical trials for all vaccines must first show they are safe and effective before any vaccine can be authorized or approved for use, including COVID-19 vaccines. The known and potential benefits of a COVID-19 vaccine must outweigh the known and potential risks of the vaccine before it is used under what is known as an Emergency Use Authorization (EUA). Watch a video explaining an EUA.</p>
-                </div>
+            <div class="hero-text">
+                <p>COVID-19 can have serious, life-threatening complications, and there is no way to know how COVID-19 will affect you. And if you get sick, you could spread the disease to friends, family, and others around you.
+                </p>
             </div>
-        </div>
-
-
-
     </section>
 
 

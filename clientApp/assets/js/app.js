@@ -192,8 +192,14 @@ document.querySelectorAll("input[name='notification']").forEach(channel => {
 
 // Registert
 registerBtn.onclick = (e)=> {
-
+    let alert = document.querySelector('.alert');
     let notification = [];
+    // Show waiting
+    register.classList.add('show-loading');
+    // Disable further action
+    registerBtn.setAttribute('disabled', true)
+
+    
     document.querySelectorAll("input[name='notification']:checked").forEach(el => {
         notification.push(el.value);
     })
@@ -214,7 +220,12 @@ registerBtn.onclick = (e)=> {
         },
         body: JSON.stringify(dateForm)
         }).then(res => res.json())
-        .then(res => console.log(res));
+        .then(res => {
+            alert.classList.add('show');
+            console.log(res);
+        
+        });
+
 }
 
 
