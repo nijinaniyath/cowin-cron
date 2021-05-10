@@ -1,7 +1,6 @@
 import express from "express";
 import scheduler from "node-schedule";
 import helmet from "helmet";
-import cors from "cors";
 import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";
 import { ValidationError } from "express-validation";
@@ -23,8 +22,11 @@ const limiter = rateLimit({
 
 const app = express();
 
-app.use(helmet());
-app.use(cors());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(bodyParser.json());
 app.use(limiter);
 
@@ -33,7 +35,8 @@ const job = scheduler.scheduleJob({ second: 120 }, function () {
   procesSessionData();
 });
 
-app.use("/", router);
+app.use(express.static("public"));
+app.use("/api", router);
 
 app.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
