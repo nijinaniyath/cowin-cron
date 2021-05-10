@@ -79,7 +79,17 @@ table(
                       tr
                         td(
                           style="color: #153643; font-family: Arial, sans-serif; border: 1px solid #b2dfdb; font-size: 12px; padding: 3px"
-                        )= center.name
+                        )
+                          span= center.name  
+                            |, 
+                          span= center.address 
+                            |, 
+                          span= center.district_name
+                            |, 
+                          span= center.state_name
+                            |, 
+                          span Pincode: 
+                            = center.pincode
                         //sessions
                         each date in dates
                           td(
@@ -89,7 +99,7 @@ table(
                             if session.available_capacity
                               span(style="color: #388e3c")= session.available_capacity
                               p(style="margin: 0; font-size: 10px")= session.vaccine
-                              if center.fee_type 
+                              if center.fee_type !== 'Free'
                                 span(
                                   style="background: #d50000; color: #ffffff; font-size: 10px"
                                 )= center.fee_type 

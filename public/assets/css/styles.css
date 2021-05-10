@@ -153,6 +153,25 @@ header h1 {
   color: #fa4242;
 }
 
+.error-badge {
+  background-color: #f7a6a6;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  transform: translateY(-1.9rem);
+  position: relative;
+  color: #910e0e;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: 0.2s ease-in;
+}
+
+.error-badge.show {
+  max-height: 30rem;
+  opacity: 1;
+}
+
 footer {
   background: #8dd4ad;
   padding: 1rem;

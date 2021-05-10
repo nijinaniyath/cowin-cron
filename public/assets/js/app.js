@@ -132,6 +132,8 @@ function validate() {
   let validState = stateControl.value ? true : false;
   let validDistricts = selctedDistricts.length > 0 ? true : false;
   let notification = [];
+  document.querySelector(".error-badge").classList.remove('show');
+
   document
     .querySelectorAll("input[name='notification']:checked")
     .forEach((el) => {
@@ -186,7 +188,10 @@ document.querySelectorAll("input[name='notification']").forEach((channel) => {
 // Registert
 registerBtn.onclick = (e) => {
   let alert = document.querySelector(".alert");
+  let errorBadge = document.querySelector(".error-badge");
+  let errorMessage = document.querySelector("#error-message");
   let notification = [];
+  errorBadge.classList.remove('show');
   // Show waiting
   register.classList.add("show-loading");
   // Disable further action
@@ -200,7 +205,7 @@ registerBtn.onclick = (e) => {
 
   let dateForm = {
     email: emailControl.value,
-    phone: mobileControl.value,
+    phone: mobileControl.value || null,
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
@@ -214,11 +219,24 @@ registerBtn.onclick = (e) => {
     },
     body: JSON.stringify(dateForm),
   })
-    .then((res) => res.json())
+    .then((res) => {
+
+      if(!res.ok) {
+        throw new Error(res.message);
+      }
+      return res.json()
+    
+    })
     .then((res) => {
       alert.classList.add("show");
-      console.log(res);
-    });
+    }).catch((err) => {
+      console.log(err);
+      errorMessage.innerText = err.message;
+      errorBadge.classList.add('show');
+      registerBtn.removeAttribute("disabled");
+      register.classList.remove("show-loading");
+    })
+    ;
 };
 
 /**
