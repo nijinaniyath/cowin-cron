@@ -19,7 +19,7 @@ export async function procesSessionData() {
 }
 
 async function fireAllSessionDataRequest(districts) {
-  console.log(`FIRE ALL SESSION DATA REQUEST: `, districts);
+  console.log(`FIRE ALL SESSION DATA REQUEST: `);
   for (let i = 0; i < districts.length; i++) {
     if (i % RATE_LIMIT === 0 && i !== 0) {
       console.log("INTERVAL...", i);
