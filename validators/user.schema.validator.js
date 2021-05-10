@@ -4,7 +4,7 @@ import { NOTIFIERS } from "../services/notifier.js";
 export const userValidation = {
   body: Joi.object({
     email: Joi.string().email().required(),
-    phone: Joi.number().integer(),
+    phone: Joi.number().integer().allow(null),
     districts: Joi.array()
       .items(Joi.number().integer().min(1).max(1000))
       .required(),
