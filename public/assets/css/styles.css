@@ -106,7 +106,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 640px) {
@@ -128,9 +128,13 @@ header h1 {
 
 .hero-section .hero-text {
   flex: 1;
-  max-width: 600px;
+  max-width: 640px;
   padding: 20px;
   letter-spacing: 2px;
+}
+
+.hero-section .hero-text a {
+  color: #0c5a2f;
 }
 
 .center {
@@ -151,25 +155,6 @@ header h1 {
 
 .text-danger {
   color: #fa4242;
-}
-
-.error-badge {
-  background-color: #f7a6a6;
-  padding: 0.25rem 0.5rem;
-  text-align: center;
-  border-radius: 0.25rem;
-  transform: translateY(-1.9rem);
-  position: relative;
-  color: #910e0e;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: 0.2s ease-in;
-}
-
-.error-badge.show {
-  max-height: 30rem;
-  opacity: 1;
 }
 
 footer {
@@ -365,6 +350,25 @@ label {
   margin-right: 0.25rem;
 }
 
+.error-badge {
+  background-color: #f7a6a6;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  transform: translateY(-1.9rem);
+  position: relative;
+  color: #910e0e;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: 0.2s ease-in;
+}
+
+.error-badge.show {
+  max-height: 30rem;
+  opacity: 1;
+}
+
 .alert {
   position: absolute;
   left: 0;
@@ -388,14 +392,27 @@ label {
 }
 
 .alert h2 {
-  font-size: 2rem;
+  font-size: 1.85rem;
   margin: 0 0 1rem;
   color: #4ac577;
 }
 
 .alert p {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #4c4c4c;
+}
+
+.alert p b {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.alert p i {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #f7a6a6;
 }
 
 .icon-done {
