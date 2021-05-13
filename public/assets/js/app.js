@@ -129,6 +129,9 @@ function validate() {
   let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   let validEmail =
     emailControl.value && emailRegex.test(emailControl.value) ? true : false;
+  let phoneno = /^\d{10}$/;
+  let validPhone = phoneno.test(mobileControl.value);
+
   let validState = stateControl.value ? true : false;
   let validDistricts = selctedDistricts.length > 0 ? true : false;
   let notification = [];
@@ -141,7 +144,7 @@ function validate() {
     });
   let validNotificationCheck = notification.length > 0 ? true : false;
 
-  if (validEmail && validState && validDistricts && validNotificationCheck) {
+  if ((validEmail || validPhone) && validState && validDistricts && validNotificationCheck) {
     registerBtn.removeAttribute("disabled");
   } else {
     registerBtn.setAttribute("disabled", true);
@@ -177,8 +180,10 @@ mobileControl.onkeyup = () => {
     whatsapp.checked = false;
   } else {
     sms.removeAttribute("disabled");
+    sms.checked = true;
     whatsapp.removeAttribute("disabled");
   }
+  validate()
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {

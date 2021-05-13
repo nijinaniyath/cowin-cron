@@ -103,34 +103,54 @@ header h1 {
   background: #b0eecd;
   padding: 3rem 0;
   color: #3b3b3b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 @media (max-width: 640px) {
   .hero-section {
-    display: block;
-    text-align: center;
+    font-size: 1rem;
   }
 }
 
-.hero-section .hero-img-cnt .hero-img {
+.hero-section .hero-img-cnt {
+  position: relative;
   width: 160px;
+  height: 160px;
+  margin: auto;
+  border-radius: 50%;
+  border: 0.5rem solid #fff;
 }
 
 @media (min-width: 640px) {
-  .hero-section .hero-img-cnt .hero-img {
-    width: 250px;
+  .hero-section .hero-img-cnt {
+    width: 200px;
+    height: 200px;
   }
+}
+
+.hero-section .hero-img-cnt:after {
+  content: "🔔";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  bottom: -10%;
+}
+
+.hero-section .hero-img-cnt .hero-img {
+  width: 100%;
+  height: auto;
+  border: none;
 }
 
 .hero-section .hero-text {
   flex: 1;
-  max-width: 640px;
+  max-width: 800px;
   padding: 20px;
   letter-spacing: 2px;
+  margin: auto;
 }
 
 .hero-section .hero-text a {
@@ -157,6 +177,10 @@ header h1 {
   color: #fa4242;
 }
 
+.text-center {
+  text-align: center;
+}
+
 footer {
   background: #8dd4ad;
   padding: 1rem;
@@ -173,6 +197,22 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+.mobile-grp {
+  position: relative;
+}
+
+.mobile-grp:before {
+  content: '+91';
+  position: absolute;
+  bottom: 0.52rem;
+  left: 0.75rem;
+  opacity: 0.75;
+}
+
+.mobile-grp .input-control {
+  padding-left: 2.5rem;
 }
 
 .input-control {
