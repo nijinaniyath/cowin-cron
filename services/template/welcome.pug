@@ -1,0 +1,86 @@
+//- All vars
+- var title = 'Thank you for subcribing!';
+- var message = 'You will be notified of the latest updates on the availability of vaccine in your nearest locality based on your registration.';
+
+//- Template 
+doctype transitional
+head
+  meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+  title Vaccine Bell
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  style(type="text/css").
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+    }
+table(
+  role="presentation",
+  border="0",
+  cellpadding="0",
+  cellspacing="0",
+  width="100%"
+)
+  tr
+    td(style="padding: 20px 0 30px 0")
+      table(
+        align="center",
+        border="0",
+        cellpadding="0",
+        cellspacing="0",
+        width="600",
+        style="border-collapse: collapse; border: 1px solid #b0eecd"
+      )
+        tr
+          td(align="center", bgcolor="#4dc384", style="padding: 30px 0 30px 0; color: #ffffff; font-family: Arial, sans-serif; ")
+            h2(style="font-size: 150px; margin: 0; border: none") 💌
+          
+            h1(
+              style="font-size: 28px; line-height: 28px; margin: 20px 0 10px;"
+            ) Welcome to Vaccine Bell &#x1F514;
+            
+            
+            h4(style="font-size: 22px; margin: 0; font-weight: 400")= title
+        tr
+          td(bgcolor="#ffffff", style="padding: 30px 20px")
+            table(
+              border="0",
+              cellpadding="0",
+              cellspacing="0",
+              width="100%",
+              style="border-collapse: collapse"
+            )
+              tr
+                td(
+                  style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px"
+                )
+                  //- Message
+                  p(style="margin: 0")= message
+              tr
+                td(
+                  style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px"
+                ) 
+                  p(style="margin: 10px 0 0") You can stop natification any time by clicking on Unsubscribe or
+                    |
+                    | Stop Notification Button
+
+        tr
+          td(style="text-align: center; padding: 0 30px 60px") 
+            a(
+              href="https://www.cowin.gov.in/home",
+              target="_blank",
+              style="color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; text-align: center; font-weight: bold; text-decoration: none; display: inline-block; background: #ff6f00; padding: 15px 100px"
+            ) Stop Notification
+        tr
+          td(bgcolor="#8dd4ad", style="padding: 20px 20px")
+            table(
+              border="0",
+              cellpadding="0",
+              cellspacing="0",
+              width="100%",
+              style="border-collapse: collapse"
+            )
+              tr
+                td(
+                  style="color: #2e2b2b; font-family: Arial, sans-serif; font-size: 16px; text-align: center"
+                )
+                  a(href="#", style="color: #2e2b2b; font-weight: bold") Unsubscribe
+                  |  to this notification instantly
