@@ -21,11 +21,14 @@ export async function procesSessionData() {
 async function fireAllSessionDataRequest(districts) {
   console.log(`FIRE ALL SESSION DATA REQUEST: `);
   for (let i = 0; i < districts.length; i++) {
+    console.log("RATE_LIMIT...", RATE_LIMIT);
     if (i % RATE_LIMIT === 0 && i !== 0) {
       console.log("INTERVAL...", i);
       await sleep(API_RATE_INTERVAL_IN_MIN * 60 * 1000);
     }
-    getSessionDataByDistrict(districts[i].districtId);
+    getSessionDataByDistrict(districts[i].districtId).catch((err) => {
+      console.log("SESION BY DIDTRICT ERROR", err);
+    });
   }
 }
 
@@ -39,7 +42,9 @@ async function getSessionDataByDistrict(districtId) {
     ...config,
   });
   const districtData = response.data;
-  processSessionDetails(districtData, districtId);
+  processSessionDetails(districtData, districtId).catch((err) =>
+    console.log("PROCESS SESSION DATA ERROR", err)
+  );
 }
 
 async function processSessionDetails(districtData, district_id) {
