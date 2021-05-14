@@ -3,7 +3,7 @@ const districtAPI =
   "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
 const hospitalAPI =
   "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict";
-const registerAPI = "http://localhost:3001/api/users";
+const registerAPI = "api/users";
 const stateControl = document.querySelector("#state");
 let states = [];
 let selctedState;
@@ -64,7 +64,7 @@ function getDistrictsById(id) {
           districts,
           {
             id: "district_id",
-            name: "district_name"
+            name: "district_name",
           },
           // Add or remove Districts
           (data, district) => {
@@ -111,7 +111,7 @@ function getHospital(district) {
           {
             id: "center_id",
             name: "name",
-            address: "address"
+            address: "address",
           },
           // Add or remove hospital
           (data, hospital) => {
@@ -149,7 +149,12 @@ function validate() {
     });
   let validNotificationCheck = notification.length > 0 ? true : false;
 
-  if ((validEmail || validPhone) && validState && validDistricts && validNotificationCheck) {
+  if (
+    (validEmail || validPhone) &&
+    validState &&
+    validDistricts &&
+    validNotificationCheck
+  ) {
     registerBtn.removeAttribute("disabled");
   } else {
     registerBtn.setAttribute("disabled", true);
@@ -188,7 +193,7 @@ mobileControl.onkeyup = () => {
     sms.checked = true;
     whatsapp.removeAttribute("disabled");
   }
-  validate()
+  validate();
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {
@@ -250,7 +255,7 @@ registerBtn.onclick = (e) => {
 /**
  * Combox
  * **/
-function comboxInit(combox, collection, params , comUpdateCallback) {
+function comboxInit(combox, collection, params, comUpdateCallback) {
   const selectedEl = combox.children[0]; // Slector e;
   const ctrl = combox.children[1]; // Input
   const dropdown = combox.children[2]; // dropdown menu
@@ -268,7 +273,7 @@ function comboxInit(combox, collection, params , comUpdateCallback) {
       if (!item.disable && !item.remove) {
         dropdownItems += `<li data-id="${item[params.id]}">
           ${item[params.name]}
-          ${item[params.address]?', ' + item[params.address]: ''}
+          ${item[params.address] ? ", " + item[params.address] : ""}
 
           </li>`;
       }
@@ -395,4 +400,3 @@ function getComboxValue(selector) {
   combVal.pop();
   return combVal;
 }
-
