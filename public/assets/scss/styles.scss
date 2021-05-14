@@ -484,15 +484,21 @@ label {
             border: 1px solid #ced4da;
             font-size: 12px;
             border-radius: 20px;
-            padding: 2px 0 2px 6px;
+            padding: 2px 25px 2px 6px;
             margin: 2px;
+            position: relative;
+
             .remove {
                 outline: none;
                 padding: 0;
                 border: none;
                 background: none;
-                cursor: pointer;
-                width: 20px;
+                cursor: pointer;    
+                width: 25px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
                 &::after{
                     content: '×';
                     font-size: 19px;

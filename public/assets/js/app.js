@@ -62,8 +62,10 @@ function getDistrictsById(id) {
         comboxInit(
           districtCombox,
           districts,
-          "district_id",
-          "district_name",
+          {
+            id: "district_id",
+            name: "district_name"
+          },
           // Add or remove Districts
           (data, district) => {
             if (district && district.type === "add") {
@@ -106,8 +108,11 @@ function getHospital(district) {
         comboxInit(
           hospitalCombox,
           hospitals,
-          "center_id",
-          "name",
+          {
+            id: "center_id",
+            name: "name",
+            address: "address"
+          },
           // Add or remove hospital
           (data, hospital) => {
             if (hospital && hospital.type === "add") {
@@ -245,7 +250,7 @@ registerBtn.onclick = (e) => {
 /**
  * Combox
  * **/
-function comboxInit(combox, collection, id, name, comUpdateCallback) {
+function comboxInit(combox, collection, params , comUpdateCallback) {
   const selectedEl = combox.children[0]; // Slector e;
   const ctrl = combox.children[1]; // Input
   const dropdown = combox.children[2]; // dropdown menu
@@ -261,7 +266,11 @@ function comboxInit(combox, collection, id, name, comUpdateCallback) {
     dropdownItems = "";
     collection.forEach((item) => {
       if (!item.disable && !item.remove) {
-        dropdownItems += `<li data-id="${item[id]}">${item[name]}</li>`;
+        dropdownItems += `<li data-id="${item[params.id]}">
+          ${item[params.name]}
+          ${item[params.address]?', ' + item[params.address]: ''}
+
+          </li>`;
       }
     });
     dropdown.innerHTML = dropdownItems;
@@ -288,7 +297,7 @@ function comboxInit(combox, collection, id, name, comUpdateCallback) {
           });
           // Update dropdownlist
           collection = collection.map((item) => {
-            if (item[id] == itemId) {
+            if (item[params.id] == itemId) {
               return { ...item, remove: true };
             }
             return item;
@@ -305,7 +314,7 @@ function comboxInit(combox, collection, id, name, comUpdateCallback) {
     let dataSelected = "";
     selected.push(data);
     selected.forEach((item) => {
-      selectedItems += `<span data-id="${item.id}" class="item">${item.name}<button class="remove"></button></span>`;
+      selectedItems += `<span data-id="${item.id}" class="item">${item.name} <button class="remove"></button></span>`;
       dataSelected += item.id + ",";
     });
     // update dataset attribute
@@ -337,7 +346,7 @@ function comboxInit(combox, collection, id, name, comUpdateCallback) {
         combox.dataset.selected = dataSelected;
 
         collection = collection.map((item) => {
-          if (item[id] == itemId || !item.remove) {
+          if (item[params.id] == itemId || !item.remove) {
             return { ...item, remove: false };
           }
           return { ...item, remove: true };
@@ -368,7 +377,7 @@ function comboxInit(combox, collection, id, name, comUpdateCallback) {
   const textBasedDropdownFilter = (text) => {
     collection = collection.map((item) => {
       if (
-        item[name].toLowerCase().includes(text.toLowerCase()) &&
+        item[params.name].toLowerCase().includes(text.toLowerCase()) &&
         !item.remove
       ) {
         return { ...item, disable: false };
@@ -386,3 +395,4 @@ function getComboxValue(selector) {
   combVal.pop();
   return combVal;
 }
+

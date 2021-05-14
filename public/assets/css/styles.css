@@ -501,8 +501,9 @@ label {
   border: 1px solid #ced4da;
   font-size: 12px;
   border-radius: 20px;
-  padding: 2px 0 2px 6px;
+  padding: 2px 25px 2px 6px;
   margin: 2px;
+  position: relative;
 }
 
 .combox .combox-selection .item .remove {
@@ -511,7 +512,11 @@ label {
   border: none;
   background: none;
   cursor: pointer;
-  width: 20px;
+  width: 25px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
 }
 
 .combox .combox-selection .item .remove::after {
