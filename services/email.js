@@ -28,7 +28,6 @@ transporter.use(
 );
 
 export function sendMail({ email, template, subject, ...context }) {
-  console.log(template, subject, context);
   let mailOptions = {
     from: EMAIL,
     to: email,
