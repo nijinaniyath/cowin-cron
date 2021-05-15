@@ -13,6 +13,8 @@ const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
+const whatsappControl = document.getElementById("whatsapp");
+const smsControl = document.getElementById("sms");
 
 let districts = [];
 let selctedDistricts = [];
@@ -181,23 +183,30 @@ emailControl.onkeyup = () => {
 mobileControl.onkeyup = () => {
   let phoneno = /^\d{10}$/;
   let validPhone = phoneno.test(mobileControl.value);
-  let sms = document.getElementById("sms");
-  let whatsapp = document.getElementById("whatsapp");
   if (!validPhone) {
-    sms.setAttribute("disabled", true);
-    sms.checked = false;
-    whatsapp.setAttribute("disabled", true);
-    whatsapp.checked = false;
+    smsControl.setAttribute("disabled", true);
+    smsControl.checked = false;
+    whatsappControl.setAttribute("disabled", true);
+    whatsappControl.checked = false;
   } else {
-    sms.removeAttribute("disabled");
-    sms.checked = true;
-    whatsapp.removeAttribute("disabled");
+    smsControl.removeAttribute("disabled");
+    smsControl.checked = true;
+    whatsappControl.removeAttribute("disabled");
   }
   validate();
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {
-  channel.addEventListener("click", validate);
+  channel.addEventListener("click", (e)=> {
+    const target = e.target;
+    if (target.value === 'sms' && target.checked){
+        whatsappControl.checked = false;
+    }
+    if (target.value === 'whatsapp' && target.checked){
+        smsControl.checked = false;
+    }
+    validate()
+  });
 });
 
 // Registert
