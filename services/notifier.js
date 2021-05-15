@@ -1,4 +1,5 @@
 import { sendMail } from "./email.js";
+import { MAIL_CONSTANTS } from "../constants/constants.js";
 export const NOTIFIERS = {
   MAIL: "mail",
 };
@@ -8,9 +9,9 @@ export const notifications = {
     sendMessage: ({ user, ...rest }) => {
       const context = {
         ...rest,
-        subject: "Vaccine Available",
-        template: "mail",
-        unsubUrl: `${process.env.APP_URL}/api/unsubscribe/${user.token}`,
+        subject: MAIL_CONSTANTS.WELCOME_SUBJECT,
+        template: MAIL_CONSTANTS.NOTIFICATION_TEMPLATE,
+        unsubUrl: `${MAIL_CONSTANTS.UNSUBLINK}/${user.token}`,
       };
       sendMail({
         ...context,

@@ -1,12 +1,12 @@
-import { HTTP_STATUS_CODE } from "../constants/constants.js";
+import { HTTP_STATUS_CODE, MAIL_CONSTANTS } from "../constants/constants.js";
 import {
   findUserByEmail,
   createUser,
   addDistrictsIfNotExists,
   unsubscribeUser,
 } from "../services/model.service.js";
-
 import { sendMail } from "../services/email.js";
+
 export async function save(req, res) {
   const isUserExist = await findUserByEmail({ email: req.body.email });
   if (isUserExist) {
@@ -19,9 +19,9 @@ export async function save(req, res) {
   addDistrictsIfNotExists({ districts: user.districts });
   sendMail({
     email: user.email,
-    subject: "Vaccine bell Welcome Aboard",
-    template: "welcome",
-    unsubLink: `${process.env.APP_URL}/api/unsubscribe/${user.token}`,
+    subject: MAIL_CONSTANTS.WELCOME_SUBJECT,
+    template: MAIL_CONSTANTS.WELCOME_TEMPLATE,
+    unsubLink: `${MAIL_CONSTANTS.UNSUBLINK}/${user.token}`,
   });
   const { email, hospitals, districts, phone, notificationChannels } = user;
   res.json({ email, hospitals, districts, phone, notificationChannels });
