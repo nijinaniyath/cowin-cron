@@ -5,8 +5,17 @@ export const NOTIFIERS = {
 
 export const notifications = {
   [NOTIFIERS.MAIL]: {
-    sendMessage: ({ centers, dates, user, getSessionByDate }) => {
-      sendMail({ centers, dates, email: user.email, getSessionByDate });
+    sendMessage: ({ user, ...rest }) => {
+      const context = {
+        ...rest,
+        subject: "Vaccine Available",
+        template: "mail",
+        unsubUrl: `${process.env.APP_URL}/api/unsubscribe/${user.token}`,
+      };
+      sendMail({
+        ...context,
+        email: user.email,
+      });
     },
   },
 };

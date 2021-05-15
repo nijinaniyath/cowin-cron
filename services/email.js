@@ -5,7 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import * as env from "dotenv";
 env.config();
-const { EMAIL, PASS, SUBJECT } = process.env;
+const { EMAIL, PASS } = process.env;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 //TODO: change authentication to app password
 const transporter = nodemailer.createTransport({
@@ -27,16 +27,15 @@ transporter.use(
   })
 );
 
-export function sendMail({ dates, centers, email, getSessionByDate }) {
+export function sendMail({ email, template, subject, ...context }) {
+  console.log(template, subject, context);
   let mailOptions = {
     from: EMAIL,
     to: email,
-    subject: SUBJECT,
-    template: "mail",
+    subject: subject,
+    template: template,
     ctx: {
-      dates,
-      centers,
-      getSessionByDate,
+      ...context,
     },
   };
 
