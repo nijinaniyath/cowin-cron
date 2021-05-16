@@ -181,16 +181,16 @@ emailControl.onkeyup = () => {
 mobileControl.onkeyup = () => {
   let phoneno = /^\d{10}$/;
   let validPhone = phoneno.test(mobileControl.value);
-  let sms = document.getElementById("sms");
+  // let sms = document.getElementById("sms");
   let whatsapp = document.getElementById("whatsapp");
   if (!validPhone) {
-    sms.setAttribute("disabled", true);
-    sms.checked = false;
+    // sms.setAttribute("disabled", true);
+    // sms.checked = false;
     whatsapp.setAttribute("disabled", true);
     whatsapp.checked = false;
   } else {
-    sms.removeAttribute("disabled");
-    sms.checked = true;
+    // sms.removeAttribute("disabled");
+    // sms.checked = true;
     whatsapp.removeAttribute("disabled");
   }
   validate();
@@ -242,6 +242,7 @@ registerBtn.onclick = (e) => {
     })
     .then((res) => {
       alert.classList.add("show");
+      window.scrollTo(0,0);
     })
     .catch((err) => {
       console.log(err);
