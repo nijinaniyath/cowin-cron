@@ -42,6 +42,6 @@ export function sendMail({ email, template, subject, ...context }) {
     if (error) {
       return console.log(error.message);
     }
-    console.log("success");
+    console.log("email sent successfully");
   });
 }
