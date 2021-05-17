@@ -231,7 +231,7 @@ registerBtn.onclick = (e) => {
 
   let dateForm = {
     email: emailControl.value,
-    phone: mobileControl.value || null,
+    phone: mobileControl.value? '91' +  mobileControl.value: null,
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
