@@ -13,6 +13,8 @@ const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
+const whatsappControl = document.getElementById("whatsapp");
+const smsControl = document.getElementById("sms");
 
 let districts = [];
 let selctedDistricts = [];
@@ -181,23 +183,32 @@ emailControl.onkeyup = () => {
 mobileControl.onkeyup = () => {
   let phoneno = /^\d{10}$/;
   let validPhone = phoneno.test(mobileControl.value);
-  let sms = document.getElementById("sms");
+  // let sms = document.getElementById("sms");
   let whatsapp = document.getElementById("whatsapp");
   if (!validPhone) {
-    sms.setAttribute("disabled", true);
-    sms.checked = false;
+    // sms.setAttribute("disabled", true);
+    // sms.checked = false;
     whatsapp.setAttribute("disabled", true);
     whatsapp.checked = false;
   } else {
-    sms.removeAttribute("disabled");
-    sms.checked = true;
+    // sms.removeAttribute("disabled");
+    // sms.checked = true;
     whatsapp.removeAttribute("disabled");
   }
   validate();
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {
-  channel.addEventListener("click", validate);
+  channel.addEventListener("click", (e)=> {
+    const target = e.target;
+    if (target.value === 'sms' && target.checked){
+        whatsappControl.checked = false;
+    }
+    if (target.value === 'whatsapp' && target.checked){
+        smsControl.checked = false;
+    }
+    validate()
+  });
 });
 
 // Registert
@@ -220,7 +231,7 @@ registerBtn.onclick = (e) => {
 
   let dateForm = {
     email: emailControl.value,
-    phone: mobileControl.value || null,
+    phone: mobileControl.value? '91' +  mobileControl.value: null,
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
@@ -242,6 +253,7 @@ registerBtn.onclick = (e) => {
     })
     .then((res) => {
       alert.classList.add("show");
+      window.scrollTo(0,0);
     })
     .catch((err) => {
       console.log(err);
