@@ -52,7 +52,9 @@ async function processSessionDetails(districtData, district_id) {
   const usersList = await findUsersByCity(district_id);
 
   usersList.forEach((user) => {
-    findAvailabilityForUser(user, centers);
+    findAvailabilityForUser(user, centers).catch((err) => {
+      console.log("ERROR", err);
+    });
   });
 }
 
@@ -62,7 +64,6 @@ async function findUsersByCity(district_id) {
 }
 
 async function findAvailabilityForUser(user, centers) {
-  console.log(user.email, "EMAIL");
   const userSelectedCenters = centers
     .filter((center) => user.hospitals?.includes(center.center_id))
     .map((center) => center.center_id);
@@ -79,7 +80,7 @@ async function findAvailabilityForUser(user, centers) {
 }
 
 function notifyUser({ user, centers, dates }) {
-  console.log("NOTIFY USERS", dates);
+  console.log("NOTIFY USERS");
   if (!centers.length) {
     return;
   }
@@ -112,6 +113,6 @@ function getAvailableCenters(userPreference, centers) {
 
 function getSessionByDate({ date, center }) {
   const session = center?.sessions?.find((session) => session.date === date);
-  console.log("SESSION:", session);
+  console.log("AVAILABLE SESSION:");
   return session || {};
 }

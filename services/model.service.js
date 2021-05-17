@@ -1,7 +1,11 @@
+import crypto from "crypto";
+
 import UserModel from "../schema/users.js";
 import DistrictModel from "../schema/districts.js";
 
 export async function createUser(user) {
+  const tokenBuffer = await crypto.randomBytes(10);
+  user.token = tokenBuffer.toString("hex");
   return UserModel.create(user);
 }
 
@@ -10,7 +14,7 @@ export async function findUserByEmail({ email }) {
 }
 
 export async function findUsersByDistrict(dtId) {
-  return UserModel.find({ districts: dtId });
+  return UserModel.find({ districts: dtId, active: true });
 }
 
 export async function getAllDistricts() {
@@ -30,4 +34,8 @@ export async function addDistrictIfnotExist(district) {
     const newDt = await DistrictModel.create({ districtId: district });
     return newDt;
   }
+}
+
+export async function unsubscribeUser(token) {
+  return UserModel.findOneAndUpdate({ token: token }, { active: false });
 }

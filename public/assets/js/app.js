@@ -183,15 +183,17 @@ emailControl.onkeyup = () => {
 mobileControl.onkeyup = () => {
   let phoneno = /^\d{10}$/;
   let validPhone = phoneno.test(mobileControl.value);
+  // let sms = document.getElementById("sms");
+  let whatsapp = document.getElementById("whatsapp");
   if (!validPhone) {
-    smsControl.setAttribute("disabled", true);
-    smsControl.checked = false;
-    whatsappControl.setAttribute("disabled", true);
-    whatsappControl.checked = false;
+    // sms.setAttribute("disabled", true);
+    // sms.checked = false;
+    whatsapp.setAttribute("disabled", true);
+    whatsapp.checked = false;
   } else {
-    smsControl.removeAttribute("disabled");
-    smsControl.checked = true;
-    whatsappControl.removeAttribute("disabled");
+    // sms.removeAttribute("disabled");
+    // sms.checked = true;
+    whatsapp.removeAttribute("disabled");
   }
   validate();
 };
@@ -251,6 +253,7 @@ registerBtn.onclick = (e) => {
     })
     .then((res) => {
       alert.classList.add("show");
+      window.scrollTo(0,0);
     })
     .catch((err) => {
       console.log(err);
