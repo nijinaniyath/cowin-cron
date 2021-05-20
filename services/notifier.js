@@ -25,7 +25,7 @@ export const notifications = {
   [NOTIFIERS.WHATSAPP]: {
     sendMessage({ centers, user }) {
       const message = buildWmessage({ centers });
-      whatsapp.sendMessage(`${user.phone}@c.us`, message).then((response) => {
+      whatsapp.sendMessage(`91${user.phone}@c.us`, message).then((response) => {
         if (response.id.fromMe) {
           console.log("Whatsapp sucesss");
         }

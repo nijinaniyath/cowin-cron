@@ -199,15 +199,15 @@ mobileControl.onkeyup = () => {
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {
-  channel.addEventListener("click", (e)=> {
+  channel.addEventListener("click", (e) => {
     const target = e.target;
-    if (target.value === 'sms' && target.checked){
-        whatsappControl.checked = false;
+    if (target.value === "sms" && target.checked) {
+      whatsappControl.checked = false;
     }
-    if (target.value === 'whatsapp' && target.checked){
-        smsControl.checked = false;
+    if (target.value === "whatsapp" && target.checked) {
+      smsControl.checked = false;
     }
-    validate()
+    validate();
   });
 });
 
@@ -231,7 +231,7 @@ registerBtn.onclick = (e) => {
 
   let dateForm = {
     email: emailControl.value,
-    phone: mobileControl.value? '91' +  mobileControl.value: null,
+    phone: mobileControl.value,
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
@@ -253,7 +253,7 @@ registerBtn.onclick = (e) => {
     })
     .then((res) => {
       alert.classList.add("show");
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     })
     .catch((err) => {
       console.log(err);
