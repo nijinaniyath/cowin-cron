@@ -1,7 +1,9 @@
 import { sendMail } from "./email.js";
+import whatsapp from "./whatsapp.js";
 import { MAIL_CONSTANTS } from "../constants/constants.js";
 export const NOTIFIERS = {
   MAIL: "mail",
+  WHATSAPP: "whatsapp",
 };
 
 export const notifications = {
@@ -19,4 +21,30 @@ export const notifications = {
       });
     },
   },
+
+  [NOTIFIERS.WHATSAPP]: {
+    sendMessage({ centers, user }) {
+      const message = buildWmessage({ centers });
+      whatsapp.sendMessage(`91${user.phone}@c.us`, message).then((response) => {
+        if (response.id.fromMe) {
+          console.log("Whatsapp sucesss");
+        }
+      });
+    },
+  },
 };
+
+function buildWmessage({ centers }) {
+  let message = `*🔔 Vaccine Available at ${centers[0].district_name}* 
+  `;
+  const maxLmt = 2048;
+  for (let i = 0; i < centers.length; i++) {
+    const center = `
+    🏥 ${centers[i].name}`;
+    if (maxLmt - 140 <= message.length) {
+      break;
+    }
+    message = `${message}${center}`;
+  }
+  return message;
+}

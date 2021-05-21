@@ -8,6 +8,7 @@ import * as env from "dotenv";
 env.config();
 
 import "./db/db.js";
+import "./services/whatsapp.js";
 import router from "./routes/index.js";
 import { procesSessionData } from "./services/service.js";
 import { HTTP_STATUS_CODE } from "./constants/constants.js";

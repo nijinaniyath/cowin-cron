@@ -13,6 +13,8 @@ const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
+const whatsappControl = document.getElementById("whatsapp");
+const smsControl = document.getElementById("sms");
 
 let districts = [];
 let selctedDistricts = [];
@@ -197,7 +199,16 @@ mobileControl.onkeyup = () => {
 };
 // Notification options
 document.querySelectorAll("input[name='notification']").forEach((channel) => {
-  channel.addEventListener("click", validate);
+  channel.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.value === "sms" && target.checked) {
+      whatsappControl.checked = false;
+    }
+    if (target.value === "whatsapp" && target.checked) {
+      smsControl.checked = false;
+    }
+    validate();
+  });
 });
 
 // Registert
@@ -220,7 +231,7 @@ registerBtn.onclick = (e) => {
 
   let dateForm = {
     email: emailControl.value,
-    phone: mobileControl.value || null,
+    phone: mobileControl.value,
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
@@ -241,11 +252,11 @@ registerBtn.onclick = (e) => {
       return res.json();
     })
     .then((res) => {
+      window.scrollTo(0, 0);
       alert.classList.add("show");
-      window.scrollTo(0,0);
     })
     .catch((err) => {
-      console.log(err);
+      window.scrollTo(0, 0);
       errorMessage.innerText = err?.message || err;
       errorBadge.classList.add("show");
       registerBtn.removeAttribute("disabled");
@@ -362,10 +373,6 @@ function comboxInit(combox, collection, params, comUpdateCallback) {
     }
   };
 
-  document.querySelector("body").onclick = (e) => {
-    dropdown.classList.remove("open");
-  };
-
   // Combox click
   combox.onclick = (e) => {
     e.preventDefault();
@@ -400,4 +407,17 @@ function getComboxValue(selector) {
   let combVal = selector.dataset.selected.split(",");
   combVal.pop();
   return combVal;
+}
+
+
+// Outside click hide dropdown
+window.onclick = function (event) {
+  console.log(event.target.matches('combox'))
+  if (!event.target.matches('combox')) {
+    document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
+      if (ddMenu.classList.contains('open')) {
+        ddMenu.classList.remove('open');
+      }
+    });
+  }
 }
