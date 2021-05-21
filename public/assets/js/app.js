@@ -252,11 +252,11 @@ registerBtn.onclick = (e) => {
       return res.json();
     })
     .then((res) => {
-      alert.classList.add("show");
       window.scrollTo(0, 0);
+      alert.classList.add("show");
     })
     .catch((err) => {
-      console.log(err);
+      window.scrollTo(0, 0);
       errorMessage.innerText = err?.message || err;
       errorBadge.classList.add("show");
       registerBtn.removeAttribute("disabled");
@@ -373,10 +373,6 @@ function comboxInit(combox, collection, params, comUpdateCallback) {
     }
   };
 
-  document.querySelector("body").onclick = (e) => {
-    dropdown.classList.remove("open");
-  };
-
   // Combox click
   combox.onclick = (e) => {
     e.preventDefault();
@@ -411,4 +407,17 @@ function getComboxValue(selector) {
   let combVal = selector.dataset.selected.split(",");
   combVal.pop();
   return combVal;
+}
+
+
+// Outside click hide dropdown
+window.onclick = function (event) {
+  console.log(event.target.matches('combox'))
+  if (!event.target.matches('combox')) {
+    document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
+      if (ddMenu.classList.contains('open')) {
+        ddMenu.classList.remove('open');
+      }
+    });
+  }
 }
