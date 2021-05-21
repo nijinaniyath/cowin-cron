@@ -21,5 +21,5 @@ export const userValidation = {
         .items(covinJoi.string().valid(NOTIFIERS.MAIL, NOTIFIERS.WHATSAPP))
         .required(),
     })
-    .xor("email", "phone"),
+    .or("email", "phone"),
 };
