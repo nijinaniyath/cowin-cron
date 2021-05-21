@@ -639,3 +639,46 @@ label {
     content: '...';
   }
 }
+
+.no-js {
+  background: #ebfff4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  text-align: center;
+  padding: 50px 20px 20px;
+  font-size: 1.25rem;
+}
+
+.no-js h2 {
+  font-size: 100px;
+  font-weight: 400;
+  margin: 30px auto;
+  display: inline-block;
+  padding: 0;
+  position: relative;
+}
+
+.no-js h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 10px auto;
+}
+
+.no-js b {
+  white-space: nowrap;
+}
+
+.no-js b img {
+  width: 22px;
+  vertical-align: middle;
+}
+
+.no-js hr {
+  border: none;
+  border-bottom: 1px solid #1DC103;
+  margin: 20px auto;
+}
