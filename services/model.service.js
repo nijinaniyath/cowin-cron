@@ -9,8 +9,16 @@ export async function createUser(user) {
   return UserModel.create(user);
 }
 
-export async function findUserByEmail({ email }) {
-  return UserModel.findOne({ email });
+export async function findUserByEmailOrPhone({ email, phone }) {
+  let query = [];
+
+  if (email) {
+    query = [...query, { email }];
+  }
+  if (phone) {
+    query = [...query, { phone }];
+  }
+  return UserModel.findOne({ $or: query });
 }
 
 export async function findUsersByDistrict(dtId) {
@@ -18,7 +26,6 @@ export async function findUsersByDistrict(dtId) {
 }
 
 export async function getAllDistricts() {
-  console.log("fetching from db");
   return DistrictModel.find();
 }
 

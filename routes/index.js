@@ -9,4 +9,5 @@ import * as userController from "../controllers/users.controller.js";
 
 router.post("/users", validate(userValidation, {}, {}), userController.save);
 router.get("/unsubscribe/:id", userController.unsubscribe);
+
 export default router;

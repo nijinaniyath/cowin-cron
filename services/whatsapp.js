@@ -26,4 +26,8 @@ client.on("ready", () => {
 
 client.initialize();
 
+export function sendMessage(phone, message) {
+  client.sendMessage(`91${phone}@c.us`, message);
+}
+
 export default client;

@@ -19,11 +19,8 @@ export async function procesSessionData() {
 }
 
 async function fireAllSessionDataRequest(districts) {
-  console.log(`FIRE ALL SESSION DATA REQUEST: `);
   for (let i = 0; i < districts.length; i++) {
-    console.log("RATE_LIMIT...", RATE_LIMIT);
     if (i % RATE_LIMIT === 0 && i !== 0) {
-      console.log("INTERVAL...", i);
       await sleep(API_RATE_INTERVAL_IN_MIN * 60 * 1000);
     }
     getSessionDataByDistrict(districts[i].districtId).catch((err) => {
@@ -80,7 +77,6 @@ async function findAvailabilityForUser(user, centers) {
 }
 
 function notifyUser({ user, centers, dates }) {
-  console.log("NOTIFY USERS");
   if (!centers.length) {
     return;
   }
@@ -113,6 +109,5 @@ function getAvailableCenters(userPreference, centers) {
 
 function getSessionByDate({ date, center }) {
   const session = center?.sessions?.find((session) => session.date === date);
-  console.log("AVAILABLE SESSION:");
   return session || {};
 }

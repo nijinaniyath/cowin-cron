@@ -14,7 +14,6 @@ import { procesSessionData } from "./services/service.js";
 import { HTTP_STATUS_CODE } from "./constants/constants.js";
 
 const { PORT, SCHEDULER_INTERVAL } = process.env;
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -30,7 +29,6 @@ app.use(
 app.use(bodyParser.json());
 app.use(limiter);
 const job = new CronJob(SCHEDULER_INTERVAL, function () {
-  console.log("STARTED...");
   procesSessionData();
 });
 
@@ -41,7 +39,10 @@ app.use("/api", router);
 
 app.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
-    return res.status(err.statusCode).json(err);
+    const { details } = err;
+    return res
+      .status(err.statusCode)
+      .json({ message: details.body[0]?.message || "Something went wrong!" });
   }
 
   return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json(err);

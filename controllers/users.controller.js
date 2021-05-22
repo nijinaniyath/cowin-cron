@@ -1,18 +1,20 @@
 import { HTTP_STATUS_CODE, MAIL_CONSTANTS } from "../constants/constants.js";
 import {
-  findUserByEmail,
+  findUserByEmailOrPhone,
   createUser,
   addDistrictsIfNotExists,
   unsubscribeUser,
 } from "../services/model.service.js";
 import { sendMail } from "../services/email.js";
+import { sendMessage } from "../services/whatsapp.js";
 
 export async function save(req, res) {
-  const isUserExist = await findUserByEmail({ email: req.body.email });
+  const { email, phone } = req.body;
+  const isUserExist = await findUserByEmailOrPhone({ email, phone });
   if (isUserExist) {
     return res
       .status(HTTP_STATUS_CODE.BAD_REQUEST)
-      .send({ message: "Email has been registered already" });
+      .send({ message: "Email or mobile has been registered already" });
   }
 
   const user = await createUser(req.body);
@@ -23,8 +25,15 @@ export async function save(req, res) {
     template: MAIL_CONSTANTS.WELCOME_TEMPLATE,
     unsubLink: `${MAIL_CONSTANTS.UNSUBLINK}/${user.token}`,
   });
-  const { email, hospitals, districts, phone, notificationChannels } = user;
-  res.json({ email, hospitals, districts, phone, notificationChannels });
+  // sendMessage(phone,);
+  const {
+    email: mail,
+    hospitals,
+    districts,
+    phone: phoneNumber,
+    notificationChannels,
+  } = user;
+  res.json({ mail, hospitals, districts, phoneNumber, notificationChannels });
 }
 
 export async function unsubscribe(req, res) {
