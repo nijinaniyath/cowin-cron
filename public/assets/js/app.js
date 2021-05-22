@@ -22,7 +22,6 @@ let districts = [];
 let selctedDistricts = [];
 let hospitals = [];
 let selctedHospitals = [];
-
 getAllStates();
 
 // Populate All states in india
@@ -268,7 +267,7 @@ registerBtn.onclick = (e) => {
     })
     .catch((err) => {
       window.scrollTo(0, 0);
-      errorMessage.innerText = err?.message || err;
+      errorMessage.innerText = err.message || err;
       errorBadge.classList.add("show");
       registerBtn.removeAttribute("disabled");
       register.classList.remove("show-loading");
