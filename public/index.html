@@ -108,16 +108,17 @@
                     </div>
                 </div>
 
-                <div id="location">
-                    <!-- States -->
-                    <div class="form-group">
-                        <label>State <span class="text-danger">*</span></label>
-                        <div class="select-box">
-                            <select class="input-control"  name="state" id="state">
-                                <option selected disabled>Select Your State</option>
-                            </select>
-                        </div>
-                    </div> <!-- States -->
+                <!-- States -->
+                <div class="form-group">
+                    <label>State <span class="text-danger">*</span></label>
+                    <div class="select-box">
+                        <select class="input-control"  name="state" id="state">
+                            <option selected disabled>Select Your State</option>
+                        </select>
+                    </div>
+                </div> <!-- States -->
+                
+                <div id="location" class="hide">
 
                     <!-- districts -->
                     <div class="form-group">
@@ -131,7 +132,7 @@
 
 
                     <!-- Hospitals -->
-                    <div class="form-group">
+                    <div id="hospital-grp" class="form-group hide">
                         <label>Hospitals</label>
                         <div id="hospitals" class="combox">
                             <div class="combox-selection"></div>

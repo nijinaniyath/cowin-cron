@@ -15,6 +15,8 @@ const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
 const whatsappControl = document.getElementById("whatsapp");
 const smsControl = document.getElementById("sms");
+const locationEl = document.getElementById("location");
+const hospitalGrpEl = document.getElementById("hospital-grp");
 
 let districts = [];
 let selctedDistricts = [];
@@ -39,6 +41,7 @@ function getAllStates() {
 }
 // State selection
 stateControl.addEventListener("input", (e) => {
+  locationEl.classList.add('show');
   selctedState = e.target.value;
   hospitals = [];
   selctedHospitals = [];
@@ -80,6 +83,14 @@ function getDistrictsById(id) {
               let i = selctedDistricts.indexOf(district.id);
               selctedDistricts.splice(i, 1);
             }
+
+            // Show hide hospital control based on district
+            if(selctedDistricts.length){
+              hospitalGrpEl.classList.add('show')
+            } else  {
+              hospitalGrpEl.classList.remove('show')
+            }
+
             // Validate button form
             validate();
           }

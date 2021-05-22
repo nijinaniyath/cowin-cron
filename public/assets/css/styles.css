@@ -95,7 +95,7 @@ header h1 {
 }
 
 .main {
-  overflow-y: auto;
+  overflow: visible;
   padding: 2rem 0;
 }
 
@@ -324,10 +324,6 @@ label {
   cursor: pointer;
 }
 
-.toggle input:hover:not(.toggle input:disabled) + label::before {
-  opacity: 1;
-}
-
 .toggle input:disabled + label {
   opacity: 0.7;
   overflow: hidden;
@@ -357,14 +353,17 @@ label {
 
 .toggle input:checked + label::before {
   opacity: 1;
+  visibility: visible;
   color: #fff;
 }
 
 .toggle label {
   border: 1px solid #ced4da;
+  -webkit-align-items: center;
   align-items: center;
   padding: 0.3rem 1rem 0.3rem 2rem;
   border-radius: 50px;
+  display: -webkit-flex;
   display: flex;
   line-height: 1;
   position: relative;
@@ -394,6 +393,7 @@ label {
   bottom: 0.8rem;
   transform: rotate(45deg);
   opacity: 0;
+  visibility: hidden;
 }
 
 .toggle label img {
@@ -488,6 +488,14 @@ label {
   border-bottom: 1rem solid #fff;
   border-right: 1rem solid #fff;
   transform: translate(-50%, -55%) rotate(45deg);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 .combox {

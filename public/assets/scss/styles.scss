@@ -114,7 +114,7 @@ header {
 }
 
 .main {
-    overflow-y: auto;
+    overflow: visible;
     padding: 2rem 0;
 }
 
@@ -307,14 +307,6 @@ label {
         z-index: 3;
         opacity: 0;
         cursor: pointer;
-
-        &:hover:not(&:disabled) {
-           & + label {
-                &::before{
-                    opacity: 1;
-                }
-            }
-        }
         &:disabled + label{
             opacity: 0.7;
             overflow: hidden;
@@ -340,6 +332,7 @@ label {
                 }
                 &::before{
                     opacity: 1;
+                    visibility: visible;
                     color: #fff;
                 }
             }
@@ -347,9 +340,11 @@ label {
     }
     label {
         border: 1px solid #ced4da;
+        -webkit-align-items: center;
         align-items: center;
         padding: 0.3rem 1rem 0.3rem 2rem;
         border-radius: 50px;
+        display: -webkit-flex;
         display: flex;
         line-height: 1;
         position: relative;
@@ -377,6 +372,7 @@ label {
             bottom: 0.8rem;
             transform: rotate(45deg);
             opacity: 0;
+            visibility: hidden;
         }
 
         img {
@@ -472,6 +468,12 @@ label {
     }
 }
 
+.hide{
+    display: none;
+}
+.show {
+        display: block;
+}
 
 .combox{
     position: relative;
