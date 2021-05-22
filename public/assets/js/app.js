@@ -246,12 +246,21 @@ registerBtn.onclick = (e) => {
     });
 
   let dateForm = {
-    email: isEmailValid? emailControl.value : '',
-    phone: isMobileValid? mobileControl.value : '',
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,
   };
+
+  if(isEmailValid){
+    dateForm.email = emailControl.value;
+  } else {
+    dateForm.notificationChannels = notification.filter(i=> i == 'whatsapp')
+  }
+  if(isMobileValid){
+    dateForm.phone = mobileControl.value;
+  } else {
+    dateForm.notificationChannels = notification.filter(i=> i == 'mail')
+  }
 
   fetch(registerAPI, {
     method: "POST",
