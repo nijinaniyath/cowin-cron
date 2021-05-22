@@ -428,7 +428,6 @@ function getComboxValue(selector) {
 
 // Outside click hide dropdown
 window.onclick = function (event) {
-  console.log(event.target.matches('combox'))
   if (!event.target.matches('combox')) {
     document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
       if (ddMenu.classList.contains('open')) {
