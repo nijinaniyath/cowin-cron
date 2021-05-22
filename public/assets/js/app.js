@@ -14,10 +14,14 @@ const registerBtn = document.getElementById("register");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
 const whatsappControl = document.getElementById("whatsapp");
+const emailCheckControl = document.getElementById("email");
 const smsControl = document.getElementById("sms");
 const locationEl = document.getElementById("location");
 const hospitalGrpEl = document.getElementById("hospital-grp");
-
+const mobileGrpEl = document.getElementById("mobile-grp");
+const emailGrpEl = document.getElementById("email-grp");
+let isEmailValid = false;
+let isMobileValid = false;
 let districts = [];
 let selctedDistricts = [];
 let hospitals = [];
@@ -143,12 +147,6 @@ function getHospital(district) {
 }
 
 function validate() {
-  let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  let validEmail =
-    emailControl.value && emailRegex.test(emailControl.value) ? true : false;
-  let phoneno = /^\d{10}$/;
-  let validPhone = phoneno.test(mobileControl.value);
-
   let validState = stateControl.value ? true : false;
   let validDistricts = selctedDistricts.length > 0 ? true : false;
   let notification = [];
@@ -162,7 +160,7 @@ function validate() {
   let validNotificationCheck = notification.length > 0 ? true : false;
 
   if (
-    (validEmail || validPhone) &&
+    (isEmailValid || isMobileValid) &&
     validState &&
     validDistricts &&
     validNotificationCheck
@@ -173,18 +171,41 @@ function validate() {
   }
 }
 
+// email Check 
+emailCheckControl.onclick = (e) => {
+  if(e.target.checked){
+    emailGrpEl.classList.add('show')
+  } else {
+    emailGrpEl.classList.remove('show')
+
+  }
+  validate();
+}
+
+// Mobile
+ whatsappControl.onclick = (e) => {
+  if(e.target.checked){
+    mobileGrpEl.classList.add('show')
+  } else {
+    mobileGrpEl.classList.remove('show')
+
+  }
+  validate();
+}
+
+
+
 // emailid
 emailControl.onkeyup = () => {
   let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  let validEmail =
-    emailControl.value && emailRegex.test(emailControl.value) ? true : false;
-  let emailCh = document.getElementById("email");
-  if (!validEmail) {
-    email.setAttribute("disabled", true);
-    emailCh.checked = false;
+  isEmailValid = emailControl.value && emailRegex.test(emailControl.value) ? true : false;
+  let validatorFlag = emailControl.nextElementSibling;
+  if (isEmailValid) {
+    validatorFlag.classList.remove('false');
+    validatorFlag.classList.add('true');
   } else {
-    email.removeAttribute("disabled");
-    emailCh.checked = true;
+    validatorFlag.classList.remove('true');
+    validatorFlag.classList.add('false');
   }
   validate();
 };
@@ -192,34 +213,19 @@ emailControl.onkeyup = () => {
 // Mobile
 mobileControl.onkeyup = () => {
   let phoneno = /^\d{10}$/;
-  let validPhone = phoneno.test(mobileControl.value);
-  // let sms = document.getElementById("sms");
-  let whatsapp = document.getElementById("whatsapp");
-  if (!validPhone) {
-    // sms.setAttribute("disabled", true);
-    // sms.checked = false;
-    whatsapp.setAttribute("disabled", true);
-    whatsapp.checked = false;
+  isMobileValid = phoneno.test(mobileControl.value);
+  let validatorFlag = mobileControl.nextElementSibling;
+  if (isMobileValid) {
+    validatorFlag.classList.remove('false');
+    validatorFlag.classList.add('true');
   } else {
-    // sms.removeAttribute("disabled");
-    // sms.checked = true;
-    whatsapp.removeAttribute("disabled");
+    validatorFlag.classList.remove('true');
+    validatorFlag.classList.add('false');
   }
   validate();
 };
-// Notification options
-document.querySelectorAll("input[name='notification']").forEach((channel) => {
-  channel.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target.value === "sms" && target.checked) {
-      whatsappControl.checked = false;
-    }
-    if (target.value === "whatsapp" && target.checked) {
-      smsControl.checked = false;
-    }
-    validate();
-  });
-});
+
+
 
 // Registert
 registerBtn.onclick = (e) => {
@@ -240,8 +246,8 @@ registerBtn.onclick = (e) => {
     });
 
   let dateForm = {
-    email: emailControl.value,
-    phone: mobileControl.value,
+    email: isEmailValid? emailControl.value : '',
+    phone: isMobileValid? mobileControl.value : '',
     notificationChannels: notification,
     districts: selctedDistricts,
     hospitals: selctedHospitals,

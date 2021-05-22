@@ -81,33 +81,6 @@
             <!-- Error -->
 
             <div id="register-form" >
-                <div class="form-group">
-                    <label for="emailid">Email ID <span class="text-danger">*</span></label>
-                    <input type="email" class="input-control" name="emailid" id="emailid">
-                </div>
-                <div class="mobile-grp">
-                    <label for="mobile">Mobile Number <span class="text-danger">*</span></label>
-                    <div class="form-group mobile-grp">
-                        <input type="number" class="input-control" name="mobile" id="mobile">
-                    </div>
-                </div>
-
-                <div id="notification-options">
-                    <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
-                    <!-- <div class="toggle">
-                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
-                        <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
-                    </div> -->
-                    <div class="toggle">
-                        <input disabled name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
-                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
-                    </div>   
-                    <div class="toggle">
-                        <input disabled name="notification" id="email" value="mail" class="toggle-btn" type="checkbox">
-                        <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
-                    </div>
-                </div>
-
                 <!-- States -->
                 <div class="form-group">
                     <label>State <span class="text-danger">*</span></label>
@@ -141,6 +114,39 @@
                         </div>
                     </div> <!-- Hospitals -->
                 </div>
+
+                <div id="notification-options">
+                    <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
+                    <!-- <div class="toggle">
+                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
+                        <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
+                    </div> -->
+                    <div class="toggle">
+                        <input name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
+                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
+                    </div>   
+                    <div class="toggle">
+                        <input name="notification" id="email" value="mail" class="toggle-btn" type="checkbox">
+                        <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
+                    </div>
+                </div>
+
+                <div id="mobile-grp" class="mobile-grp hide">
+                    <label for="mobile">Mobile Number <span class="text-danger">*</span></label>
+                    <div class="form-group mobile-grp relative">
+                        <input type="number" class="input-control" name="mobile" id="mobile">
+                        <span class="vaild"></span>
+                    </div>
+                </div>
+
+                <div id="email-grp" class="form-group hide">
+                    <label for="emailid">Email ID <span class="text-danger">*</span></label>
+                    <div class="form-group relative">
+                        <input type="email" class="input-control" name="emailid" id="emailid">
+                        <span class="vaild"></span>
+                    </div>
+                </div>
+
 
 
                 <p>Please fill <span class="text-danger">*</span> mandatory fields.</p>
