@@ -33,33 +33,40 @@ export const notifications = {
   },
 };
 
-function welcomeMessage(unsubcribeShorUrl) {
-  let br = '%0a';
+export function welcomeMessage() {
+  let unsubcribeShorUrl = 'http://vaccinebell.in/';
   let welcome = `*Thank you for subcribing Vaccine Bell 🔔*`;
   let info = `You will be notified of the latest updates on the availability of vaccine in your nearest locality based on your registration.`
   let unsubcribe = `You can stop natification any time by sending 'stop' or clicking on ${unsubcribeShorUrl}`;
   let disclaimer = `_Vaccine Bell using the Public API service provided by cowin.gov.in, the vaccine portal of the Union Ministry of Health. If the API is down, there will slowness in updating data accordingly._`;
-  return (welcome + br + info + br +  disclaimer + br + unsubcribe);
+  let msg = `${welcome}
+${info}
+  
+${disclaimer}
+  
+${unsubcribe}`;
+  
+  return msg;
 }
 
 function buildWmessage({ centers }) {
-  let br = '%0a';
-  let message = `*🔔 Vaccine Available at ${centers[0].district_name}* 
-  `;
+  let message = `*🔔 Vaccine Available at ${centers[0].district_name}*`;
   const maxLmt = 2048;
   for (let i = 0; i < centers.length; i++) {
-    const center = `${br}${br}${centers[i].name},`;
-    const address = `${centers[i].address}`;
-    const fee_type = `${br}*Fee:* ${centers[i].fee_type}`;
-    const vaccine = `${br}*Vaccine:* ${centers[i].sessions[0].vaccine}`;
     let sessions = '';
     centers[i].sessions.forEach(s=> sessions += s.date +', ');
-    const dates = `${br}*Avilable on:* ${sessions.replace(/,(?=[^,]*$)/, '')}`;
+    const center = `
 
+${centers[i].name}, ${centers[i].address}
+*Fee:* ${centers[i].fee_type}
+*Vaccine:* ${centers[i].sessions[0].vaccine}
+*Avilable on:* ${sessions.replace(/,(?=[^,]*$)/, '')}
+`;
+    
     if (maxLmt - 140 <= message.length) {
       break;
     }
-    message = `${message}${center + address + vaccine + fee_type + dates}`;
+    message = `${message}${center}`;
   }
   return message;
 }
