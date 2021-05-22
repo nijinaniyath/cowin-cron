@@ -95,7 +95,7 @@ header h1 {
 }
 
 .main {
-  overflow-y: auto;
+  overflow: visible;
   padding: 2rem 0;
 }
 
@@ -224,7 +224,15 @@ input[type=number] {
 }
 
 .mobile-grp .input-control {
-  padding-left: 2.5rem;
+  padding-left: 3rem;
+}
+
+#districts {
+  z-index: 1500;
+}
+
+#hospitals {
+  z-index: 1000;
 }
 
 .input-control {
@@ -324,10 +332,6 @@ label {
   cursor: pointer;
 }
 
-.toggle input:hover:not(.toggle input:disabled) + label::before {
-  opacity: 1;
-}
-
 .toggle input:disabled + label {
   opacity: 0.7;
   overflow: hidden;
@@ -357,14 +361,17 @@ label {
 
 .toggle input:checked + label::before {
   opacity: 1;
+  visibility: visible;
   color: #fff;
 }
 
 .toggle label {
   border: 1px solid #ced4da;
+  -webkit-align-items: center;
   align-items: center;
   padding: 0.3rem 1rem 0.3rem 2rem;
   border-radius: 50px;
+  display: -webkit-flex;
   display: flex;
   line-height: 1;
   position: relative;
@@ -394,6 +401,7 @@ label {
   bottom: 0.8rem;
   transform: rotate(45deg);
   opacity: 0;
+  visibility: hidden;
 }
 
 .toggle label img {
@@ -434,7 +442,7 @@ label {
   text-align: center;
   padding: 3rem 1rem;
   transition: opacity 0.3s ease-in;
-  z-index: 3;
+  z-index: 1500;
 }
 
 .alert.show {
@@ -490,6 +498,65 @@ label {
   transform: translate(-50%, -55%) rotate(45deg);
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.relative {
+  position: relative;
+}
+
+.vaild {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  right: 3px;
+  top: 50%;
+  color: #fff;
+  transform: translateY(-50%);
+}
+
+.vaild.false {
+  background: #fa4242;
+}
+
+.vaild.false:after, .vaild.false::before {
+  content: '';
+  width: 0rem;
+  height: 0.9rem;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.vaild.false::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.vaild.true {
+  background: #06DD55;
+}
+
+.vaild.true:after {
+  content: '';
+  width: 0.5rem;
+  height: 0.9rem;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -65%) rotate(45deg);
+}
+
 .combox {
   position: relative;
   display: flex;
@@ -513,9 +580,10 @@ label {
   border: 1px solid #ced4da;
   font-size: 12px;
   border-radius: 20px;
-  padding: 2px 25px 2px 6px;
+  padding: 5px 25px 5px 13px;
   margin: 2px;
   position: relative;
+  line-height: 1.25;
 }
 
 .combox .combox-selection .item .remove {
@@ -602,15 +670,17 @@ label {
   cursor: pointer;
 }
 
-.btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
 .btn:hover {
   color: #fff;
   background-color: #15D259;
   border-color: #15D259;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: #bbb;
+  pointer-events: none;
 }
 
 .show-loading {
@@ -649,4 +719,47 @@ label {
   100% {
     content: '...';
   }
+}
+
+.no-js {
+  background: #ebfff4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+  text-align: center;
+  padding: 50px 20px 20px;
+  font-size: 1.25rem;
+}
+
+.no-js h2 {
+  font-size: 100px;
+  font-weight: 400;
+  margin: 30px auto;
+  display: inline-block;
+  padding: 0;
+  position: relative;
+}
+
+.no-js h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 10px auto;
+}
+
+.no-js b {
+  white-space: nowrap;
+}
+
+.no-js b img {
+  width: 22px;
+  vertical-align: middle;
+}
+
+.no-js hr {
+  border: none;
+  border-bottom: 1px solid #1DC103;
+  margin: 20px auto;
 }

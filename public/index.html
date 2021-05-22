@@ -62,6 +62,7 @@
 
 </head>
 <body>
+    
     <header>
         <div class="container  flex-center">
             <img class="logo" src="./assets/images/logo-tr.png" alt="">
@@ -80,43 +81,17 @@
             <!-- Error -->
 
             <div id="register-form" >
+                <!-- States -->
                 <div class="form-group">
-                    <label for="emailid">Email ID <span class="text-danger">*</span></label>
-                    <input type="email" class="input-control" name="emailid" id="emailid">
-                </div>
-                <div class="mobile-grp">
-                    <label for="mobile">Mobile Number <span class="text-danger">*</span></label>
-                    <div class="form-group mobile-grp">
-                        <input type="number" class="input-control" name="mobile" id="mobile">
+                    <label>State <span class="text-danger">*</span></label>
+                    <div class="select-box">
+                        <select class="input-control"  name="state" id="state">
+                            <option selected disabled>Select Your State</option>
+                        </select>
                     </div>
-                </div>
-
-                <div id="notification-options">
-                    <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
-                    <!-- <div class="toggle">
-                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
-                        <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
-                    </div> -->
-                    <div class="toggle">
-                        <input disabled name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
-                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
-                    </div>   
-                    <div class="toggle">
-                        <input disabled name="notification" id="email" value="mail" class="toggle-btn" type="checkbox">
-                        <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
-                    </div>
-                </div>
-
-                <div id="location">
-                    <!-- States -->
-                    <div class="form-group">
-                        <label>State <span class="text-danger">*</span></label>
-                        <div class="select-box">
-                            <select class="input-control"  name="state" id="state">
-                                <option selected disabled>Select Your State</option>
-                            </select>
-                        </div>
-                    </div> <!-- States -->
+                </div> <!-- States -->
+                
+                <div id="location" class="hide">
 
                     <!-- districts -->
                     <div class="form-group">
@@ -130,7 +105,7 @@
 
 
                     <!-- Hospitals -->
-                    <div class="form-group">
+                    <div id="hospital-grp" class="form-group hide">
                         <label>Hospitals</label>
                         <div id="hospitals" class="combox">
                             <div class="combox-selection"></div>
@@ -139,6 +114,39 @@
                         </div>
                     </div> <!-- Hospitals -->
                 </div>
+
+                <div id="notification-options">
+                    <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
+                    <!-- <div class="toggle">
+                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
+                        <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
+                    </div> -->
+                    <div class="toggle">
+                        <input name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
+                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
+                    </div>   
+                    <div class="toggle">
+                        <input name="notification" id="email" value="mail" class="toggle-btn" type="checkbox">
+                        <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
+                    </div>
+                </div>
+
+                <div id="mobile-grp" class="mobile-grp hide">
+                    <label for="mobile">Mobile Number <span class="text-danger">*</span></label>
+                    <div class="form-group mobile-grp relative">
+                        <input type="number" class="input-control" name="mobile" id="mobile">
+                        <span class="vaild"></span>
+                    </div>
+                </div>
+
+                <div id="email-grp" class="form-group hide">
+                    <label for="emailid">Email ID <span class="text-danger">*</span></label>
+                    <div class="form-group relative">
+                        <input type="email" class="input-control" name="emailid" id="emailid">
+                        <span class="vaild"></span>
+                    </div>
+                </div>
+
 
 
                 <p>Please fill <span class="text-danger">*</span> mandatory fields.</p>
@@ -177,6 +185,24 @@ For any further information or suggestions, please feel free to reach out at
                 
             </div>
     </section>
+
+<!-- If Javascript disabled -->
+<noscript>
+    <div class="no-js">
+        <h2 class="text-danger">{js}</h2>
+        <h3>JavaScript disabled</h3>
+        
+        <hr>
+        <div class="container">
+            <span class="text-danger"> JavaScript is disabled </span>
+            on your browser. To use <b><img class="logo" src="./assets/images/favicon-32x32.png" alt=""> Vaccine Bell</b>, please enable JavaScript
+            or upgrade to a JavaScript capable browser 
+        </div>
+    </div>
+</noscript>
+<!-- If Javascript disabled -->
+
+
 
     <footer>
         <a href="mailto:vaccinebell@gmail.com">✉️Get Support</a>

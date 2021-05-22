@@ -21,7 +21,7 @@ console.log('%cAbout Us 👉', "color:#03a9f4; font-size: 22px", behind);
 
 
 
-console.log("%cHey Geek, Have you got your 💉..?  \n > Yes() \n > No() ", "color:green; font-size: 22px");
+console.log("%cHey🕵️, Have you got your 💉..?  \n > Yes() \n > No() ", "color:green; font-size: 22px");
 
 
 const yes = YES = Yes = ()=> {
