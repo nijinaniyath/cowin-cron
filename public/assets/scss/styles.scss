@@ -422,7 +422,7 @@ label {
     text-align: center;
     padding: 3rem 1rem;
     transition: opacity 0.3s ease-in;
-    z-index: 3;
+    z-index: 1500;
     &.show {
         opacity: 1;
         visibility: visible;
