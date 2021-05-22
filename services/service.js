@@ -1,7 +1,11 @@
 import axios from "axios";
 import dateformat from "dateformat";
 import { notifications } from "./notifier.js";
-import { getAllDistricts, findUsersByDistrict } from "./model.service.js";
+import {
+  getAllDistricts,
+  findUsersByDistrict,
+  updateNotifiedOn,
+} from "./model.service.js";
 
 import * as env from "dotenv";
 env.config();
@@ -80,6 +84,7 @@ function notifyUser({ user, centers, dates }) {
   if (!centers.length) {
     return;
   }
+  updateNotifiedOn(user).catch((err) => {});
   for (let channel of user.notificationChannels) {
     const notifier = notifications[channel];
     notifier.sendMessage({ dates, centers, user, getSessionByDate });

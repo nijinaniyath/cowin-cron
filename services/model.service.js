@@ -22,7 +22,17 @@ export async function findUserByEmailOrPhone({ email, phone }) {
 }
 
 export async function findUsersByDistrict(dtId) {
-  return UserModel.find({ districts: dtId, active: true });
+  return UserModel.find({
+    districts: dtId,
+    active: true,
+    notifiedOn: {
+      $lte: new Date(new Date() - 1000 * 60 * 60 * 24),
+    },
+  });
+}
+
+export async function updateNotifiedOn(user) {
+  return UserModel.updateOne({ _id: user.id }, { notifiedOn: Date.now() });
 }
 
 export async function getAllDistricts() {

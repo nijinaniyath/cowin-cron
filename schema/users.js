@@ -20,7 +20,11 @@ const UserSchema = new mongoose.Schema({
     default: true,
     required: true,
   },
-  updated: { type: Date, default: Date.now() },
+  notifiedOn: {
+    type: Date,
+    default: () => new Date("2020-05-22T16:57:29.142Z"),
+  },
+  updated: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("users", UserSchema);
