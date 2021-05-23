@@ -459,7 +459,3 @@ window.addEventListener(touchEvent, (event)=>{
     });
   }
 });
-document.getElementById('test').addEventListener('keyup', e=> {
-  document.getElementById('demoT').innerHTML = e.keyCode +','+ e.key
-  console.log(e.keyCode , e.key);
-})
