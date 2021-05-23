@@ -736,3 +736,49 @@ label {
         margin: 20px auto;
     }
 }
+.page-header{
+    background: #44a973;
+    padding: 4rem 0;
+    color: #fff;
+    margin-bottom: 1rem;
+    h1{
+        font-weight: 200;
+        font-size: 2.5rem;
+    }
+}
+
+.unsubcribe{
+    min-height: calc(100vh - 9rem);
+    color: #5a5a5a;
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #4a4a4a;
+    }
+
+    .flex {
+        display: flex;
+        .btn{
+            display: inline-block;
+            margin: 0 0.5rem;
+            &.btn-d{
+                background: #fff;
+                color:#4a4a4a;
+                border: 2px solid;
+                &:hover{
+                    background-color:#4a4a4a ;
+                    color: #fff;
+                }
+            }
+            &.btn-p {
+                background: #d0fae0;
+                color:#06b144;
+                border: 2px solid; 
+                &:hover{
+                    background-color:#06b144 ;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

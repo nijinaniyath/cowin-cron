@@ -780,3 +780,57 @@ label {
   border-bottom: 1px solid #1DC103;
   margin: 20px auto;
 }
+
+.page-header {
+  background: #44a973;
+  padding: 4rem 0;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.page-header h1 {
+  font-weight: 200;
+  font-size: 2.5rem;
+}
+
+.unsubcribe {
+  min-height: calc(100vh - 9rem);
+  color: #5a5a5a;
+}
+
+.unsubcribe h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.unsubcribe .flex {
+  display: flex;
+}
+
+.unsubcribe .flex .btn {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.unsubcribe .flex .btn.btn-d {
+  background: #fff;
+  color: #4a4a4a;
+  border: 2px solid;
+}
+
+.unsubcribe .flex .btn.btn-d:hover {
+  background-color: #4a4a4a;
+  color: #fff;
+}
+
+.unsubcribe .flex .btn.btn-p {
+  background: #d0fae0;
+  color: #06b144;
+  border: 2px solid;
+}
+
+.unsubcribe .flex .btn.btn-p:hover {
+  background-color: #06b144;
+  color: #fff;
+}
