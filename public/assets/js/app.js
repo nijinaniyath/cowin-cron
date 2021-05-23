@@ -448,9 +448,9 @@ function getComboxValue(selector) {
   return combVal;
 }
 
-let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+// let touchEvent = 'ontouchstart' in window ? 'touchstart ' : 'click';
 // Outside click hide dropdown
-window.addEventListener(touchEvent, (event)=>{
+window.addEventListener('click', (event)=>{
   if (!event.target.matches('combox')) {
     document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
       if (ddMenu.classList.contains('open')) {
