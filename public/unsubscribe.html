@@ -136,7 +136,27 @@
     </noscript>
     <!-- If Javascript disabled -->
 
-    <script></script>
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');    
+    const btnUnsubscribe = document.getElementById('btn-yes');
+
+      btnUnsubscribe.onclick = (e)=> {
+          fetch('api/unsubscribe/' + token, {
+              method: 'DELETE',
+              })
+              .then(res => res.json()) 
+              .then(res =>{
+                let ct =  document.querySelector('.unsubcribe .container');
+                ct.innerHTML = `<h2>${res.message}</h2>`;
+                //Back to home
+                setTimeout(()=>{
+                  window.location.href = '/';
+                },2000);
+
+              })
+      }
+    </script>
 
     <footer>
       <a href="mailto:vaccinebell@gmail.com">✉️Get Support</a>
