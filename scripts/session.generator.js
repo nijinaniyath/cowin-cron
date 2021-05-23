@@ -1,11 +1,13 @@
-const fs = require("fs");
-const { Client } = require("whatsapp-web.js");
+import fs from "fs";
+import path from "path";
+import { Client } from "whatsapp-web.js";
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const SESSION_FILE_PATH = "../session/session.json";
 
 let sessionCfg;
-if (fs.existsSync(SESSION_FILE_PATH)) {
-  sessionCfg = require(SESSION_FILE_PATH);
-}
 const client = new Client({
   puppeteer: {
     headless: false,
@@ -22,11 +24,16 @@ client.on("authenticated", (session) => {
   console.log("AUTH!");
   sessionCfg = session;
 
-  fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
-    if (err) {
-      console.error(err);
+  fs.writeFile(
+    path.join(__dirname, SESSION_FILE_PATH),
+    JSON.stringify(session),
+    { flag: "wx" },
+    function (err) {
+      if (err) {
+        console.error(err);
+      }
     }
-  });
+  );
 });
 
 client.on("auth_failure", () => {
