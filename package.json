@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "session": "node scripts/session.generator.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
