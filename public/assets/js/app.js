@@ -419,6 +419,10 @@ function comboxInit(combox, collection, params, comUpdateCallback) {
 
   // Typing on combox
   ctrl.onkeyup = (e) => {
+    if(e.keyCode == 13 || e.key == 'Enter'){
+      dropdown.classList.remove("open");
+      e.target.value = '';
+    }
     textBasedDropdownFilter(e.target.value);
   };
 
@@ -444,9 +448,9 @@ function getComboxValue(selector) {
   return combVal;
 }
 
-
+let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 // Outside click hide dropdown
-window.onclick = function (event) {
+window.addEventListener(touchEvent, (event)=>{
   if (!event.target.matches('combox')) {
     document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
       if (ddMenu.classList.contains('open')) {
@@ -454,4 +458,4 @@ window.onclick = function (event) {
       }
     });
   }
-}
+});
