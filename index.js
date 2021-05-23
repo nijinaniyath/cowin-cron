@@ -27,7 +27,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(limiter);
+app.use("/api/", limiter);
 const job = new CronJob(SCHEDULER_INTERVAL, function () {
   console.log("STARTED...");
   procesSessionData();
