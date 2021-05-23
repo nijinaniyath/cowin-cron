@@ -44,6 +44,10 @@ export async function save(req, res) {
   res.json({ mail, hospitals, districts, phoneNumber, notificationChannels });
 }
 
+export async function confirmUnsubscribe(req, res) {
+  res.redirect(`/unsubscribe.html?token=${req.params.id}`);
+}
+
 export async function unsubscribe(req, res) {
   await unsubscribeUser(req.params.id);
   res.json({ message: "Unsubscribed successfully" });

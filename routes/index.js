@@ -8,6 +8,6 @@ const router = express.Router();
 import * as userController from "../controllers/users.controller.js";
 
 router.post("/users", validate(userValidation, {}, {}), userController.save);
-router.get("/unsubscribe/:id", userController.unsubscribe);
-
+router.get("/unsubscribe/:id", userController.confirmUnsubscribe);
+router.delete("/unsubscribe/:id", userController.unsubscribe);
 export default router;

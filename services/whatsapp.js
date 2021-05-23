@@ -17,7 +17,6 @@ client.on("authenticated", (session) => {
 });
 client.on("auth_failure", () => {
   console.log("AUTH Failed !");
-  process.exit();
 });
 
 client.on("ready", () => {
