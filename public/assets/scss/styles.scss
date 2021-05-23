@@ -239,6 +239,21 @@ input[type=number] {
     z-index: 1000;
 }
 
+#register-form {
+    position: relative;
+
+    &.disable::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(#fff, 0.5);
+        z-index: 1600;
+    }
+}
+
 .input-control {
     display: block;
     width: 100%;
@@ -247,13 +262,14 @@ input[type=number] {
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    background-color: #fff;
+    background: white !important;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     @include placeholder { color: #9b9b9b; }
     appearance: none;
+    -webkit-appearance: none;
     &:focus {
         color: #212529;
         background-color: #fff;
@@ -560,8 +576,8 @@ label {
             .remove {
                 outline: none;
                 padding: 0;
-                border: none;
-                background: none;
+                border: none !important;
+                background: none !important;
                 cursor: pointer;    
                 width: 25px;
                 position: absolute;
@@ -584,6 +600,7 @@ label {
         border: none;
         outline: none;
         box-shadow: none;
+        background: transparent !important;
     }
     .combox-dropdown{
         position: absolute;

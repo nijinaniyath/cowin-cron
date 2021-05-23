@@ -20,6 +20,7 @@ const locationEl = document.getElementById("location");
 const hospitalGrpEl = document.getElementById("hospital-grp");
 const mobileGrpEl = document.getElementById("mobile-grp");
 const emailGrpEl = document.getElementById("email-grp");
+const registerForm = document.getElementById("register-form");
 let isEmailValid = false;
 let isMobileValid = false;
 let districts = [];
@@ -233,6 +234,7 @@ registerBtn.onclick = (e) => {
   let errorBadge = document.querySelector(".error-badge");
   let errorMessage = document.querySelector("#error-message");
   let notification = [];
+  registerForm.classList.add("disable");
   errorBadge.classList.remove("show");
   // Show waiting
   register.classList.add("show-loading");
@@ -284,6 +286,7 @@ registerBtn.onclick = (e) => {
       window.scrollTo(0, 0);
       errorMessage.innerText = err.message || err;
       errorBadge.classList.add("show");
+      registerForm.classList.remove("disable");
       registerBtn.removeAttribute("disabled");
       register.classList.remove("show-loading");
     });
@@ -404,7 +407,14 @@ function comboxInit(combox, collection, params, comUpdateCallback) {
     e.stopPropagation();
     ctrl.focus();
     textBasedDropdownFilter(ctrl.value);
-    dropdown.classList.add("open");
+    // Show Dropdown menu
+    document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
+      if (ddMenu !== dropdown) {
+        ddMenu.classList.remove('open');
+      } else{
+        dropdown.classList.add("open");
+      }
+    });
   };
 
   // Typing on combox
