@@ -36,7 +36,7 @@ export const notifications = {
 export function welcomeMessage(unsubcribeShorUrl) {
   let welcome = `*Thank you for subcribing Vaccine Bell 🔔*`;
   let info = `You will be notified of the latest updates on the availability of vaccine in your nearest locality based on your registration.`;
-  let unsubcribe = `You can stop natification any time by sending 'stop' or clicking on ${unsubcribeShorUrl}`;
+  let unsubcribe = `You can stop notification any time by sending 'stop' or clicking on ${unsubcribeShorUrl}`;
   let disclaimer = `_Vaccine Bell using the Public API service provided by cowin.gov.in, the vaccine portal of the Union Ministry of Health. If the API is down, there will slowness in updating data accordingly._`;
   let msg = `${welcome}
 ${info}
