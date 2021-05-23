@@ -54,5 +54,5 @@ export async function addDistrictIfnotExist(district) {
 }
 
 export async function unsubscribeUser(token) {
-  return UserModel.findOneAndUpdate({ token: token }, { active: false });
+  return UserModel.findOneAndDelete({ token: token });
 }
