@@ -235,6 +235,17 @@ input[type=number] {
   z-index: 1000;
 }
 
+#hospitals .combox-selection:empty::before {
+  content: 'All Hospitals';
+  display: inline-block;
+  border: 1px solid #ced4da;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 5px 13px;
+  margin: 2px;
+  line-height: 1.25;
+}
+
 #register-form {
   position: relative;
 }
