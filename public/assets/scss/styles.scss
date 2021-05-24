@@ -782,3 +782,47 @@ label {
         }
     }
 }
+
+.data-use {
+    position: fixed;
+    z-index: 1750;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    background: #fff;
+    box-shadow: 0 -10px 10px rgba(#000, 0.15);
+    color: #5a5a5a;
+    animation: slideUp 3s ease-in;
+    #close-data-use{
+        position: absolute;
+        right: 1rem;
+        background: none !important;
+        border: none;
+        outline: none;
+        font-size: 2rem;
+        top: 0;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+    .container {
+        max-width: 700px;
+    }
+    h3 {
+        font-size: 1.25rem;
+        color: #444;
+        font-weight: 600;
+        margin: 0 0 5px;
+        line-height: 1.5;
+    }
+    p{
+        margin: 0;
+    }
+}
+
+@keyframes slideUp {
+    0% , 75%{ transform: translateY(120%); }
+    100%{ transform: translateY(0%); }
+}

@@ -459,3 +459,9 @@ window.addEventListener('click', (event)=>{
     });
   }
 });
+
+
+// close disclaimer
+document.getElementById('close-data-use').addEventListener('click', ()=> {
+  document.querySelector('.data-use').classList.add('hide');
+})
