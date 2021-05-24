@@ -1,6 +1,8 @@
 //- All vars
 - var title = 'Thank you for subcribing!';
 - var message = 'You will be notified of the latest updates on the availability of vaccine in your nearest locality based on your registration.';
+- var legal = "This is just a notification system only. Please don't misunderstand that vaccine is provided via this app. Also you can't book vaccine via Vaccine Bell. The sole purpose of this app is to notify users when vaccine is available at the centers you choose. Vaccine bell is not officially associated with Co-Win. For booking vaccine and other services, kindly visit Co-Win official website"
+
 - var disclaimer = 'Vaccine Bell using the Public API service provided by cowin.gov.in, the vaccine portal of the Union Ministry of Health. If the API is down, there will slowness in updating data accordingly.';
 
 //- Template 
@@ -56,6 +58,8 @@ table(
                 )
                   //- Message
                   p(style="margin: 0")= message
+                  
+                  p(style="margin:10px 0 0")= legal
               tr
                 td(
                   style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px"

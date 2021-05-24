@@ -99,12 +99,16 @@ header h1 {
   padding: 2rem 0;
 }
 
+.text-high {
+  color: #00897b;
+  font-size: 1.1rem;
+}
+
 .hero-section {
   background: #b0eecd;
   padding: 3rem 0;
   color: #3b3b3b;
-  font-size: 1.5rem;
-  text-align: center;
+  font-size: 1rem;
 }
 
 @media (max-width: 640px) {
