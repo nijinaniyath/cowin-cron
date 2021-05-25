@@ -13,6 +13,7 @@ import router from "./routes/index.js";
 import { procesSessionData } from "./services/service.js";
 import { HTTP_STATUS_CODE } from "./constants/constants.js";
 import logger from "./services/logger.js";
+
 const { PORT, SCHEDULER_INTERVAL } = process.env;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -26,8 +27,10 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
+
 app.use(bodyParser.json());
 app.use("/api/", limiter);
+
 const job = new CronJob(SCHEDULER_INTERVAL, function () {
   logger.log({
     level: "info",
