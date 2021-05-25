@@ -1,4 +1,4 @@
-const centers = [
+const centers = {centers:[
     {
       "center_id": 561030,
       "name": "HWC KOHRA Rudhauli",
@@ -2603,6 +2603,6 @@ const centers = [
         }
       ]
     }
-  ];
+  ]};
 
   export default centers;
