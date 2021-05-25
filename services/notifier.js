@@ -11,7 +11,7 @@ export const notifications = {
     sendMessage: ({ user, ...rest }) => {
       const context = {
         ...rest,
-        subject: MAIL_CONSTANTS.WELCOME_SUBJECT,
+        subject: MAIL_CONSTANTS.AVAILABILITY_SUBJECT,
         template: MAIL_CONSTANTS.NOTIFICATION_TEMPLATE,
         unsubUrl: `${MAIL_CONSTANTS.UNSUBLINK}/${user.token}`,
       };
