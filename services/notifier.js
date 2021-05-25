@@ -36,11 +36,14 @@ export const notifications = {
 export function welcomeMessage(unsubcribeShorUrl) {
   let welcome = `*Thank you for subcribing Vaccine Bell 🔔*`;
   let info = `You will be notified of the latest updates on the availability of vaccine in your nearest locality based on your registration.`;
-  let unsubcribe = `You can stop natification any time by sending 'stop' or clicking on ${unsubcribeShorUrl}`;
+  let legal = `This is just a notification system only. Please don't misunderstand that vaccine is provided via this app. Also you can't book vaccine via Vaccine Bell. The sole purpose of this app is to notify users when vaccine is available at the centers you choose. Vaccine bell is not officially associated with Co-Win. For booking vaccine and other services, kindly visit Co-Win official website` ;
   let disclaimer = `_Vaccine Bell using the Public API service provided by cowin.gov.in, the vaccine portal of the Union Ministry of Health. If the API is down, there will slowness in updating data accordingly._`;
+  let unsubcribe = `You can stop notification any time by sending 'stop' or clicking on ${unsubcribeShorUrl}`;
   let msg = `${welcome}
 ${info}
   
+${legal}
+
 ${disclaimer}
   
 ${unsubcribe}`;

@@ -103,10 +103,6 @@
 
     <div class="unsubcribe">
       <div class="container">
-        <p>
-          <b>Vaccine Bell 🔔</b> will helps you to get notified about the
-          vaccine availability near you.
-        </p>
         <h2>
           Are you sure you want to unsubcribe and stop receiving notifications?
         </h2>
@@ -148,11 +144,15 @@
               .then(res => res.json()) 
               .then(res =>{
                 let ct =  document.querySelector('.unsubcribe .container');
-                ct.innerHTML = `<h2>${res.message}</h2>`;
+                ct.innerHTML = `<div class="text-center"> 
+                        <h2> ${res.message}</h2>
+                        <p>You data has been successfully deleted from our database </p>
+                      </div> 
+                          `;
                 //Back to home
                 setTimeout(()=>{
                   window.location.href = '/';
-                },2000);
+                },5000);
 
               })
       }
