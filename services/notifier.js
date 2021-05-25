@@ -56,18 +56,20 @@ ${unsubcribe}`;
   return msg;
 }
 
-function buildWmessage({ centers }) {
+export function buildWmessage({ centers }) {
   let message = `*🔔 Vaccine Available at ${centers[0].district_name}*`;
   const maxLmt = 2048;
   for (let i = 0; i < centers.length; i++) {
     let sessions = "";
-    centers[i].sessions.forEach((s) => (sessions += s.date + ", "));
-    const center = `
+    centers[i].sessions.forEach((s) => ( sessions += `
+${s.date} - ${s.available_capacity} Dose`));
 
+    const center = `
 ${centers[i].name}, ${centers[i].address}
 *Fee:* ${centers[i].fee_type}
 *Vaccine:* ${centers[i].sessions[0].vaccine}
-*Avilable on:* ${sessions.replace(/,(?=[^,]*$)/, "")}
+*Age:* ${centers[i].sessions[0].min_age_limit}+
+*Availability:* ${sessions}
 `;
 
     if (maxLmt - 140 <= message.length) {

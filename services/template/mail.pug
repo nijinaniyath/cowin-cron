@@ -101,6 +101,8 @@ table(
                             if session.available_capacity
                               span(style="color: #388e3c")= session.available_capacity
                               p(style="margin: 0; font-size: 10px")= session.vaccine
+                              p(style="margin: 0; color: #DD2C00; font-size: 10px")= session.min_age_limit
+                                |+
                               if center.fee_type !== 'Free'
                                 span(
                                   style="background: #d50000; color: #ffffff; font-size: 10px"
