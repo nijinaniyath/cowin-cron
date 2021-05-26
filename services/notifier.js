@@ -56,8 +56,12 @@ export function buildWmessage({ centers }) {
   const maxLmt = 2048;
   for (let i = 0; i < centers.length; i++) {
     let sessions = "";
-    centers[i].sessions.forEach((s) => ( sessions += `
-${s.date} - ${s.available_capacity} Dose`));
+    centers[i].sessions.forEach((s) => {
+      if(s.available_capacity){
+        sessions += `
+${s.date} - ${s.available_capacity} Dose`
+      }
+});
 
     const center = `
 ${centers[i].name}, ${centers[i].address}
