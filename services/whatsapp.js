@@ -26,6 +26,14 @@ client.on("message", (msg) => {
   if (msg.body.toLocaleLowerCase() == STOP_TEXT) {
     const phone = msg.from.slice(2, 12);
     unsubscribeUserByWhatsapp(phone);
+    sendMessage(phone, `*Unsubscribed successfully*
+Thank you for using Vaccine Bell
+
+You have been successfully removed from this subscriber list and won't receive any further notification from us. 
+
+Did you unsubscribe by accident?
+Re-subcribe: https://vaccinebell.in/
+`)
     logger.log({
       level: "info",
       message: `unsubscribed through whatsapp ${phone}`,
