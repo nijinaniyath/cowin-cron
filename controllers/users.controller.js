@@ -8,7 +8,7 @@ import {
 import { sendMail } from "../services/email.js";
 import { sendMessage } from "../services/whatsapp.js";
 import { welcomeMessage } from "../services/notifier.js";
-
+import logger from "../services/logger.js";
 export async function save(req, res) {
   const { email, phone } = req.body;
   const isUserExist = await findUserByEmailOrPhone({ email, phone });
@@ -19,8 +19,10 @@ export async function save(req, res) {
   }
 
   const user = await createUser(req.body);
+  logger.info("new user registration success");
   addDistrictsIfNotExists({ districts: user.districts });
   if (user.email) {
+    logger.info("Welcome mail sent");
     sendMail({
       email: user.email,
       subject: MAIL_CONSTANTS.WELCOME_SUBJECT,
@@ -29,6 +31,7 @@ export async function save(req, res) {
     });
   }
   if (phone) {
+    logger.info("Welcome whatsapp message sent");
     sendMessage(
       phone,
       welcomeMessage(`${MAIL_CONSTANTS.UNSUBLINK}/${user.token}`)

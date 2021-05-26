@@ -40,8 +40,16 @@ export function sendMail({ email, template, subject, ...context }) {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error.message);
+      logger.log({
+        level: "error",
+        message: `Sent mail failed for ${mailOptions.to} at ${Date.now()}`,
+        error,
+      });
     }
-    console.log("email sent successfully");
+    logger.log({
+      level: "info",
+      message: `Mail sent to ${mailOptions.to} at ${Date.now()}`,
+      error,
+    });
   });
 }

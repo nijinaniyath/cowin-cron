@@ -10,3 +10,5 @@ export const MAIL_CONSTANTS = {
   NOTIFICATION_TEMPLATE: "mail",
   UNSUBLINK: `${process.env.APP_URL}/api/unsubscribe`,
 };
+
+export const STOP_TEXT = "stop";

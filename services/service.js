@@ -1,6 +1,7 @@
 import axios from "axios";
 import dateformat from "dateformat";
 import { notifications } from "./notifier.js";
+import logger from "./logger.js";
 import {
   getAllDistricts,
   findUsersByDistrict,
@@ -28,7 +29,7 @@ async function fireAllSessionDataRequest(districts) {
       await sleep(API_RATE_INTERVAL_IN_MIN * 60 * 1000);
     }
     getSessionDataByDistrict(districts[i].districtId).catch((err) => {
-      console.log("SESION BY DIDTRICT ERROR", err);
+      logger.warn("SESION BY DIDTRICT ERROR", err);
     });
   }
 }
@@ -44,7 +45,7 @@ async function getSessionDataByDistrict(districtId) {
   });
   const districtData = response.data;
   processSessionDetails(districtData, districtId).catch((err) =>
-    console.log("PROCESS SESSION DATA ERROR", err)
+    logger.warn("PROCESS SESSION DATA ERROR", err)
   );
 }
 
@@ -54,7 +55,7 @@ async function processSessionDetails(districtData, district_id) {
 
   usersList.forEach((user) => {
     findAvailabilityForUser(user, centers).catch((err) => {
-      console.log("ERROR", err);
+      logger.warn("ERROR", err);
     });
   });
 }
@@ -99,7 +100,7 @@ function getAvailableCenters(userPreference, centers) {
   for (let centerId of userPreference) {
     const center = centers.find((center) => center.center_id === centerId);
     const availabilities = center?.sessions.filter(
-      (session) => session.available_capacity > 0
+      (session) => session.available_capacity > 3
     );
     if (availabilities?.length) {
       const availableDates = availabilities
@@ -113,6 +114,6 @@ function getAvailableCenters(userPreference, centers) {
 }
 
 function getSessionByDate({ date, center }) {
-  const session = center?.sessions?.find((session) => session.date === date);
+  const session = center?.sessions?.filter((session) => session.date === date);
   return session || {};
 }

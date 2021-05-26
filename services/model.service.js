@@ -2,6 +2,7 @@ import crypto from "crypto";
 
 import UserModel from "../schema/users.js";
 import DistrictModel from "../schema/districts.js";
+import logger from "./logger.js";
 
 export async function createUser(user) {
   const tokenBuffer = await crypto.randomBytes(10);
@@ -26,7 +27,7 @@ export async function findUsersByDistrict(dtId) {
     districts: dtId,
     active: true,
     notifiedOn: {
-      $lte: new Date(new Date() - 1000 * 60 * 60 * 24),
+      $lte: new Date(new Date() - 1000 * 60 * 60 * 12),
     },
   });
 }
@@ -54,5 +55,9 @@ export async function addDistrictIfnotExist(district) {
 }
 
 export async function unsubscribeUser(token) {
+  logger.info("user unsubscribed using mail link");
   return UserModel.findOneAndDelete({ token: token });
+}
+export async function unsubscribeUserByWhatsapp(phone) {
+  return UserModel.findOneAndDelete({ phone });
 }

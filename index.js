@@ -12,6 +12,7 @@ import "./services/whatsapp.js";
 import router from "./routes/index.js";
 import { procesSessionData } from "./services/service.js";
 import { HTTP_STATUS_CODE } from "./constants/constants.js";
+import logger from "./services/logger.js";
 
 const { PORT, SCHEDULER_INTERVAL } = process.env;
 const limiter = rateLimit({
@@ -26,10 +27,15 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
+
 app.use(bodyParser.json());
 app.use("/api/", limiter);
+
 const job = new CronJob(SCHEDULER_INTERVAL, function () {
-  console.log("STARTED...");
+  logger.log({
+    level: "info",
+    message: `STARTED JOB.. ${Date.now()}`,
+  });
   procesSessionData();
 });
 
@@ -50,5 +56,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT || 3000, () => {
-  console.log(`server running on port ${PORT || 3000}`);
+  logger.log({
+    level: "info",
+    message: `server running on port ${PORT || 3000}`,
+  });
 });
