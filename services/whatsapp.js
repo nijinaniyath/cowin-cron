@@ -19,7 +19,7 @@ client.on("authenticated", () => {
   logger.info("Whatsapp authentication success");
 });
 client.on("auth_failure", () => {
-  console.warn("Whatsapp authentiation failed");
+  logger.error("Whatsapp authentiation failed");
 });
 
 client.on("message", (msg) => {

@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: () => new Date("2020-05-22T16:57:29.142Z"),
   },
+  notifiedCenters: {
+    type: [Number],
+  },
   updated: { type: Date, default: Date.now },
 });
 
