@@ -1,7 +1,7 @@
 import { Client } from "whatsapp-web.js";
 import session from "../session/session.js";
 import { unsubscribeUserByWhatsapp } from "./model.service.js";
-import { STOP_TEXT } from "../constants/constants.js";
+import { STOP_TEXT, UNSUBSCRIBE_FEEDBACK } from "../constants/constants.js";
 import logger from "./logger.js";
 const client = new Client({
   puppeteer: {
@@ -26,14 +26,7 @@ client.on("message", (msg) => {
   if (msg.body.toLocaleLowerCase() == STOP_TEXT) {
     const phone = msg.from.slice(2, 12);
     unsubscribeUserByWhatsapp(phone);
-    sendMessage(phone, `*Unsubscribed successfully*
-Thank you for using Vaccine Bell
-
-You have been successfully removed from this subscriber list and won't receive any further notification from us. 
-
-Did you unsubscribe by accident?
-Re-subcribe: https://vaccinebell.in/
-`)
+    sendMessage(phone, UNSUBSCRIBE_FEEDBACK);
     logger.log({
       level: "info",
       message: `unsubscribed through whatsapp ${phone}`,
