@@ -46,6 +46,7 @@ export function sendMail({ email, template, subject, ...context }) {
         message: `Sent mail failed for ${mailOptions.to} at ${Date.now()}`,
         error,
       });
+      return;
     }
     logger.log({
       level: "info",

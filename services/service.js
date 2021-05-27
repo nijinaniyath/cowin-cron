@@ -117,7 +117,6 @@ function getAvailableCenters(userPreference, centers, user) {
       (session) => session.available_capacity > 3
     );
     if (availabilities?.length) {
-      logger.info("availability found!");
       const availableDates = availabilities
         .filter((session) => !uniqueDates.includes(session.date))
         .map((session) => session.date);
