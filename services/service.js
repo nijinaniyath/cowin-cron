@@ -30,9 +30,17 @@ async function fireAllSessionDataRequest(districts) {
     if (i % RATE_LIMIT === 0 && i !== 0) {
       await sleep(API_RATE_INTERVAL_IN_MIN * 60 * 1000);
     }
-    getSessionDataByDistrict(districts[i].districtId).catch((err) => {
+    try {
+      const districtData = await getSessionDataByDistrict(
+        districts[i].districtId
+      );
+      await processSessionDetails(
+        districtData,
+        districts[i].districtId
+      ).catch((err) => logger.error("PROCESS SESSION DATA ERROR", err));
+    } catch {
       logger.error("SESION BY DIDTRICT ERROR", err);
-    });
+    }
   }
 }
 
@@ -46,10 +54,8 @@ async function getSessionDataByDistrict(districtId) {
     ...config,
   });
   const districtData = response.data;
-  logger.info("Get session by districts details...");
-  processSessionDetails(districtData, districtId).catch((err) =>
-    logger.error("PROCESS SESSION DATA ERROR", err)
-  );
+  logger.info(`Get session by districts details...${districtId}`);
+  return districtData;
 }
 
 async function processSessionDetails(districtData, district_id) {
@@ -89,23 +95,27 @@ async function findAvailabilityForUser(user, centers) {
   notifyUser({ user, ...avaialabilityMap });
 }
 
-function notifyUser({ user, centers, dates }) {
+async function notifyUser({ user, centers, dates }) {
   if (!centers.length) {
     return;
   }
-  updateNotifiedOn(user, centers).catch((err) => {
-    logger.error("user update error!", err);
-  });
-  for (let channel of user.notificationChannels) {
-    const notifier = notifications[channel];
-    notifier.sendMessage({ dates, centers, user, getSessionByDate });
+  try {
+    await updateNotifiedOn(user, centers);
+    for (let channel of user.notificationChannels) {
+      const notifier = notifications[channel];
+      notifier.sendMessage({ dates, centers, user, getSessionByDate });
+    }
+  } catch {
+    for (let channel of user.notificationChannels) {
+      const notifier = notifications[channel];
+      notifier.sendMessage({ dates, centers, user, getSessionByDate });
+    }
   }
 }
 
 const sleep = async (ms) => new Promise((res) => setTimeout(res, ms));
 
 function getAvailableCenters(userPreference, centers, user) {
-  logger.info("Get available centers...");
   let avaiableCenters = [];
   let uniqueDates = [];
   for (let centerId of userPreference) {
