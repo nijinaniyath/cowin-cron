@@ -13,7 +13,7 @@ const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
-const whatsappControl = document.getElementById("whatsapp");
+// const whatsappControl = document.getElementById("whatsapp");
 const emailCheckControl = document.getElementById("email");
 const smsControl = document.getElementById("sms");
 const locationEl = document.getElementById("location");
@@ -184,15 +184,15 @@ emailCheckControl.onclick = (e) => {
 }
 
 // Mobile
- whatsappControl.onclick = (e) => {
-  if(e.target.checked){
-    mobileGrpEl.classList.add('show')
-  } else {
-    mobileGrpEl.classList.remove('show')
+//  whatsappControl.onclick = (e) => {
+//   if(e.target.checked){
+//     mobileGrpEl.classList.add('show')
+//   } else {
+//     mobileGrpEl.classList.remove('show')
 
-  }
-  validate();
-}
+//   }
+//   validate();
+// }
 
 
 
