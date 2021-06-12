@@ -95,7 +95,7 @@ header {
     position: relative;
 }
 .container-fluid {
-    max-width: 1170px;
+    max-width: 1050px;
     width: 100%;
     padding: 0 15px;
     text-align: center;
@@ -121,15 +121,130 @@ header {
     color: #00897b;
     font-size: 1.1rem;
 }
+
+#mobile-app{
+    background: #00897b;
+    padding: 2.5rem 0;
+    color: #fff;
+    .text-container {
+        padding: 20px;
+        h2 {
+            margin: 0;
+            font-size:2rem;
+            @media (max-width: 640px) {
+                font-size: 1.5em;
+            }
+        }
+        .flex {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            @media (max-width: 640px) {
+                text-align: center;
+                display: block;
+                .gplay{
+                    display: block;
+                    margin: 15px auto 0;
+                }
+            }
+        }
+    }
+    .phone{
+        flex: none;
+        display: block;
+        font-size: 10px;
+        margin:0 auto ;
+        width: 20em;
+        height: 38em;
+        background: #fff url(../images/logo-v.png) no-repeat;
+        background-size: 15em auto;
+        background-position: center 40%;
+        border-width: 0.8em 0.5em 1.2em;
+        border-style: solid;
+        color: #212529;
+        border-radius: 1.5em;
+        box-shadow:  0 0 0.2em  #333 inset;
+        position: relative;
+        @media (max-width: 640px) {
+            font-size: 5px;
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            width: 1.6em;
+            height: 1.5em;
+            background: #333;
+            background-image: radial-gradient(ellipse at center, #303030 0%,#0d0d0d 22%,#010101 43%,#0a0a0a 56%,#000000 68%,#383838 86%,#020202 100%);
+            background-size: 0.8em 0.8em;
+            background-position: center 20%;
+            background-repeat: no-repeat;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius:  0 0 2em 2em;
+        }
+        &:after{
+            content: '';
+            width: 0.1em;
+            height: 5em;
+            position: absolute;
+            right: -0.6em;
+            top: 20%;
+            background: #222;
+        }
+    }
+}
+
+.gplay {
+    width: 165px;
+    height: 50px;
+    display: inline-block;
+    background: url('../images/get-on-google-play.png') no-repeat;
+    background-size: contain;
+    border-radius: 4px;
+    margin-left: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+#vb-alaram{
+        background: #ff5722;
+        padding: 2.5rem 0;
+        color: #fff;
+    .container-fluid{
+        align-items: center;
+        justify-content: center;
+        flex-direction: row-reverse;
+    }
+    img {
+        margin-left: 20px;
+        @media (max-width: 640px) {
+            margin: 0 0 20px;
+            width: 150px;
+        }
+    }
+    .text-container {
+        padding: 20px;
+        h2 {
+            margin: 0;
+            font-size:2rem;
+            @media (max-width: 640px) {
+                font-size: 1.5em;
+            }
+        }
+    } 
+}
+
+
 .hero-section{
-    background: #b0eecd;
+    background: #f7fffb;
     padding: 3rem 0;
     color: #3b3b3b;
     font-size: 1rem;
-    // text-align: center;
     @media (max-width: 640px) {
         font-size: 1rem;
     }
+
 
     .hero-img-cnt{
         position: relative;
@@ -683,6 +798,33 @@ label {
         pointer-events: none;
     }
 
+    &.hide {
+        display: none;
+    }
+
+
+    &.wa-jn-btn {
+        font-size: 1rem;
+        font-weight: 600;
+        background:#4FCE5D;
+        @media (min-width: 640px) {
+            margin-right: 0.4rem;
+            padding: .65rem 0.75rem;
+            width: auto;
+            display: inline-block;
+        }
+        &:before {
+            content: 'Join '; 
+            font-weight: 400;
+            display: inline-block;
+            padding-left: 2rem;
+            margin-right: 3px;
+            background: url('../images/whatsapp.png') no-repeat;
+            background-size: 1.5rem auto;
+            background-position: left center;
+        }
+    }
+
 }
 
 .show-loading{
@@ -826,8 +968,8 @@ label {
             opacity: 0.7;
         }
     }
-    .container {
-        max-width: 700px;
+    .container-fluid {
+        display: block;
     }
     h3 {
         font-size: 1.25rem;

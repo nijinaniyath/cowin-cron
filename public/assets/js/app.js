@@ -1,3 +1,4 @@
+import {WhatsAppGroups} from './whatsapp-groups.js';
 const stateAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
 const districtAPI =
   "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
@@ -9,15 +10,17 @@ let states = [];
 let selctedState;
 
 const districtCombox = document.querySelector("#districts");
-const hospitalCombox = document.querySelector("#hospitals");
+// const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
+const registerGrp = document.getElementById("register-action");
 const emailControl = document.getElementById("emailid");
 const mobileControl = document.getElementById("mobile");
-// const whatsappControl = document.getElementById("whatsapp");
+const whatsappControl = document.getElementById("whatsapp");
+const whatsappGrps = document.getElementById("whatsapp-grps");
 const emailCheckControl = document.getElementById("email");
 const smsControl = document.getElementById("sms");
 const locationEl = document.getElementById("location");
-const hospitalGrpEl = document.getElementById("hospital-grp");
+// const hospitalGrpEl = document.getElementById("hospital-grp");
 const mobileGrpEl = document.getElementById("mobile-grp");
 const emailGrpEl = document.getElementById("email-grp");
 const registerForm = document.getElementById("register-form");
@@ -47,11 +50,14 @@ function getAllStates() {
 stateControl.addEventListener("input", (e) => {
   locationEl.classList.add('show');
   selctedState = e.target.value;
-  hospitals = [];
   selctedHospitals = [];
   districts = [];
+  whatsappGrps.innerHTML = '';
   document.querySelector("#hospitals .combox-selection").innerHTML = "";
   document.querySelector("#hospitals .combox-dropdown").innerHTML = "";
+  selctedDistricts = [];
+  whatsappControl.setAttribute('disabled', true);
+  emailCheckControl.setAttribute('disabled', true);
   getDistrictsById(selctedState);
   validate();
 });
@@ -80,7 +86,7 @@ function getDistrictsById(id) {
             if (district && district.type === "add") {
               if (!selctedDistricts.includes(district.id)) {
                 selctedDistricts.push(district.id);
-                getHospital(district.id);
+                // getHospital(district.id);
               }
             }
             if (district && district.type === "remove") {
@@ -88,11 +94,15 @@ function getDistrictsById(id) {
               selctedDistricts.splice(i, 1);
             }
 
-            // Show hide hospital control based on district
+            // Show hide controls based on district
             if(selctedDistricts.length){
-              hospitalGrpEl.classList.add('show')
+              whatsappControl.removeAttribute('disabled');
+              emailCheckControl.removeAttribute('disabled');
+              // /Generate whatsapp join button based on selection
+              generateWhatsappJoin();
             } else  {
-              hospitalGrpEl.classList.remove('show')
+              whatsappControl.setAttribute('disabled' , true);
+              emailCheckControl.setAttribute('disabled' , true);
             }
 
             // Validate button form
@@ -108,44 +118,44 @@ function getDistrictsById(id) {
  * Get Hospitals
  *
  * **/
-function getHospital(district) {
-  let d = new Date();
-  let DD = d.getDate() <= 9 ? "0" + d.getDate() : d.getDate();
-  let mm = d.getMonth() + 1;
-  let MM = mm <= 9 ? "0" + mm : mm;
-  let YYY = d.getFullYear();
-  API_URL = `${hospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}`;
+// function getHospital(district) {
+//   let d = new Date();
+//   let DD = d.getDate() <= 9 ? "0" + d.getDate() : d.getDate();
+//   let mm = d.getMonth() + 1;
+//   let MM = mm <= 9 ? "0" + mm : mm;
+//   let YYY = d.getFullYear();
+//   API_URL = `${hospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}`;
 
-  fetch(API_URL)
-    .then((response) => response.json())
-    .then((hospitalData) => {
-      hospitals.push(...hospitalData.centers);
+//   fetch(API_URL)
+//     .then((response) => response.json())
+//     .then((hospitalData) => {
+//       hospitals.push(...hospitalData.centers);
 
-      if (hospitals && hospitals.length) {
-        comboxInit(
-          hospitalCombox,
-          hospitals,
-          {
-            id: "center_id",
-            name: "name",
-            address: "address",
-          },
-          // Add or remove hospital
-          (data, hospital) => {
-            if (hospital && hospital.type === "add") {
-              if (!selctedHospitals.includes(hospital.id)) {
-                selctedHospitals.push(hospital.id);
-              }
-            }
-            if (hospital && hospital.type === "remove") {
-              let i = selctedHospitals.indexOf(hospital.id);
-              selctedHospitals.splice(i, 1);
-            }
-          }
-        );
-      }
-    });
-}
+//       if (hospitals && hospitals.length) {
+//         comboxInit(
+//           hospitalCombox,
+//           hospitals,
+//           {
+//             id: "center_id",
+//             name: "name",
+//             address: "address",
+//           },
+//           // Add or remove hospital
+//           (data, hospital) => {
+//             if (hospital && hospital.type === "add") {
+//               if (!selctedHospitals.includes(hospital.id)) {
+//                 selctedHospitals.push(hospital.id);
+//               }
+//             }
+//             if (hospital && hospital.type === "remove") {
+//               let i = selctedHospitals.indexOf(hospital.id);
+//               selctedHospitals.splice(i, 1);
+//             }
+//           }
+//         );
+//       }
+//     });
+// }
 
 function validate() {
   let validState = stateControl.value ? true : false;
@@ -174,25 +184,52 @@ function validate() {
 
 // email Check 
 emailCheckControl.onclick = (e) => {
-  if(e.target.checked){
-    emailGrpEl.classList.add('show')
-  } else {
-    emailGrpEl.classList.remove('show')
-
-  }
+  emailGrpEl.classList.add('show')
+  registerGrp.classList.remove('hide');
+  whatsappGrps.classList.add('hide');
   validate();
 }
 
 // Mobile
-//  whatsappControl.onclick = (e) => {
-//   if(e.target.checked){
-//     mobileGrpEl.classList.add('show')
-//   } else {
-//     mobileGrpEl.classList.remove('show')
+ whatsappControl.onclick = (e) => {
+  whatsappGrps.classList.remove('hide');
+  registerGrp.classList.add('hide');
+  emailGrpEl.classList.remove('show');
+  // mobileGrpEl.classList.add('show');
+  generateWhatsappJoin()
+}
 
-//   }
-//   validate();
-// }
+function generateWhatsappJoin(){
+  whatsappGrps.innerHTML = '';
+
+  if(selctedState != 17){
+    whatsappGrps.innerHTML = `<p>
+    Apologies ! Currently vaccine bell doesn't support whatsapp notification on this city. 
+    Instead,you can make use of email service or vaccine bell mobile app.
+    </p>
+    `
+    return 
+  }
+
+
+  whatsappGrps.innerHTML = `<p>
+  To get WhatsApp vaccine availability notification, 
+  Join on Vaccine Bell WhatsApp city groups
+  </p>
+  `
+  WhatsAppGroups.forEach(grp=> {
+    if(selctedDistricts.some(id =>  grp.cityId == id)) {
+        grp.groups.forEach( wtGrp=> {
+          let whatsappJoinBtn = document.createElement('a')
+          whatsappJoinBtn.setAttribute('href', wtGrp.link);
+          whatsappJoinBtn.setAttribute('target','_blank');
+          whatsappJoinBtn.setAttribute('class','btn wa-jn-btn');
+          whatsappJoinBtn.innerText = wtGrp.name;
+          whatsappGrps.appendChild(whatsappJoinBtn);
+        });
+    }
+  })
+}
 
 
 

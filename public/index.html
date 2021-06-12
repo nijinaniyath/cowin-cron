@@ -76,7 +76,7 @@
 <body>
     
     <header>
-        <div class="container  flex-center">
+        <div class="container-fluid  flex-center">
             <img class="logo" src="./assets/images/logo-tr.png" alt="">
             <h1>Vaccine Bell</h1>
         </div>
@@ -130,17 +130,23 @@
                 <div id="notification-options">
                     <label class="mb10" for="mobile">Get Notification through<span class="text-danger">*</span></label>
                     <!-- <div class="toggle">
-                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="checkbox">
+                        <input disabled name="notification" id="sms" value="sms" class="toggle-btn" type="radio">
                         <label for="sms"> <img src="./assets/images/text.png"> <span>SMS</span>   </label>
                     </div> -->
-                    <!-- <div class="toggle">
-                        <input name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="checkbox">
-                        <label for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
-                    </div>    -->
                     <div class="toggle">
-                        <input name="notification" id="email" value="mail" class="toggle-btn" type="checkbox">
+                        <input disabled name="notification" id="email" value="mail" class="toggle-btn" type="radio">
                         <label for="email"> <img src="./assets/images/gmail.png">  <span>Email</span>   </label>
                     </div>
+                    <div class="toggle">
+                        <input disabled name="notification" id="whatsapp" value="whatsapp" class="toggle-btn" type="radio">
+                        <label  for="whatsapp"> <img src="./assets/images/whatsapp.png"> <span>WhatsApp</span>   </label>
+                    </div>   
+                </div>
+
+
+
+                <div id="whatsapp-grps" class="hide">
+
                 </div>
 
                 <div id="mobile-grp" class="mobile-grp hide">
@@ -160,12 +166,13 @@
                 </div>
 
 
-
-                <p>Please fill <span class="text-danger">*</span> mandatory fields.</p>
-
-                <button class="btn" id="register" disabled> 
-                    Register<span class="loading">ing</span>
-                </button>
+                <div id="register-action">
+                    <p class="form-info">Please fill <span class="text-danger">*</span> mandatory fields.</p>
+                    
+                    <button class="btn" id="register" disabled> 
+                        Register<span class="loading">ing</span>
+                    </button>
+                </div>
             </div>
 
 
@@ -184,33 +191,69 @@
         </div>
     </div>
 
+<section id="mobile-app">
+    <div class="container-fluid">
+        <div class="phone"></div>
+        <div class="text-container">
+            <h2>Get vaccine availability notification on phone.</h2>
+            <p>
+                Vaccine Bell is now available as mobile app.
+                You will get the vaccine availability notification without registering to the same.
+                Install Vaccine Bell on you mobile,
+                Select districts/hospitals convenient for you.
+                Get notified about vaccine availability instantly.
+            </p>
+            <p class="flex">Download : <a class="gplay" href="https://play.google.com/store/apps/details?id=com.anshad.vaccinebell&utm_source=vaccinebell_website" target="_self"></a> </p>
+        </div>
+    </div>
+</section>
 
-    <section class="hero-section">
-            <div class="hero-img-cnt">
-                <img class="hero-img" src="./assets/images/vaccination.png" alt="">
-            </div>
-            <div class="hero-text">
-                <p>
-                    Get yourself notified about the vaccine availability near you.
-                    Register on Vaccine Bell using your Mobile Number or Email Id. Select districts/hospitals convenient for you. Get notified about vaccine availability based on registered options.
-                </p>
-                <p class="text-high">
-                    This is just a notification system only.
-                     Please don't misunderstand that vaccine is provided via this app. 
-                     Also you can't book vaccine via Vaccine Bell. 
-                     The sole purpose of this app is to notify users when vaccine is available at the centers you choose.
-                    Vaccine bell is not officially associated with Co-Win. 
-                    For booking vaccine and other services, kindly visit 
-                    <a target="_blank" href="https://www.cowin.gov.in/home">Co-Win official website</a>
-                    
-                </p>
-                <p>
-                    For any further information or suggestions, please feel free to reach out at 
-                    <a href="mailto:vaccinebell@gmail.com">vaccinebell@gmail.com</a>.
-                </p>
+<section id="vb-alaram">
+    <div class="container-fluid">
+        <img src="./assets/images/alert.png" alt="">
+        <div class="text-container">
+            <h2>Vaccine Alert </h2>
+            <p>
+                A new Vaccine Alarm feature has been integrated in to Vaccine Bell. This feature is meant for those users who don't want to register in Vaccine Bell, but still need to receive vaccine notification.
+
+                To make use of this, you need to navigate to vaccine alarm page from Vaccine Bell application. There , an option is provided to choose the cities/hospitals for which you want to get notified about the vaccine availability.
                 
-            </div>
-    </section>
+                Once it's done, you will get notified via the browser whenever vaccine is available at the selected cities/hospitals, until the browser tab is closed. You don't need to keep the tab always active. You will still receive notifications even if the browser is running in the background.
+                
+                This feature is available for both the PC and mobile phone    
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section id="about" class="hero-section">
+    <div class="container-fluid">
+        <div class="hero-img-cnt">
+            <img class="hero-img" src="./assets/images/vaccination.png" alt="">
+        </div>
+        <div class="hero-text">
+            <p>
+                Get yourself notified about the vaccine availability near you. Register on Vaccine Bell using your Mobile Number or Email Id. Select districts/hospitals convenient for you. Get notified about vaccine availability based on registered options.
+            </p>
+            <p class="text-high">
+                This is just a notification system only.
+                    Please don't misunderstand that vaccine is provided via this app. 
+                    Also you can't book vaccine via Vaccine Bell. 
+                    The sole purpose of this app is to notify users when vaccine is available at the centers you choose.
+                Vaccine bell is not officially associated with Co-Win. 
+                For booking vaccine and other services, kindly visit 
+                <a target="_blank" href="https://www.cowin.gov.in/home">Co-Win official website</a>
+                
+            </p>
+            <p>
+                For any further information or suggestions, please feel free to reach out at 
+                <a href="mailto:vaccinebell@gmail.com">vaccinebell@gmail.com</a>.
+            </p>
+            
+        </div>
+    </div>
+</section>
 
 <!-- If Javascript disabled -->
 <noscript>
@@ -230,14 +273,11 @@
 
     <div class="data-use">
         <button id="close-data-use">&times;</button>
-        <div class="container">
-            <h3>WhatsApp notification is temporarily disabled </h3>
-            <p> Apologies for the inconvenience, 
-                WhatsApp notification is temporarily disabled for maintanance purpose </p>
-            <!-- <h3>Your data is safe with us</h3>
+        <div class="container-fluid">
+            <h3>Your data is safe with us</h3>
             <p>
                 Your data will only be used for sending vaccine notification. Once you unsubscribe from Vaccine Bell, your data will be deleted from our database.
-            </p> -->
+            </p>
         </div>
     </div>
 
@@ -246,7 +286,7 @@
     <footer>
         <a href="mailto:vaccinebell@gmail.com">✉️Get Support</a>
     </footer>
-    <script src="./assets/js/app.js"></script>
+    <script type="module" src="./assets/js/app.js"></script>
 
     <audio id="audio-player" src="./assets/audio/clapping.wav"></audio>
 </body>
