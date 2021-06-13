@@ -77,8 +77,15 @@
     
     <header>
         <div class="container-fluid  flex-center">
-            <img class="logo" src="./assets/images/logo-tr.png" alt="">
-            <h1>Vaccine Bell</h1>
+            <a href="/" class="brand">
+                <img class="logo" src="./assets/images/logo-tr.png" alt="">
+                <h1>Vaccine Bell</h1>
+            </a>
+            <ul class="nav">
+                <li class="hide-mob"><a href="#mobile-app">Mobile App</a></li>
+                <li><a class="nav-btn" href="#vb-alert">🔔 VB Alert</a></li>
+                <li class="hide-mob"><a href="#about">About</a></li>
+            </ul>
         </div>
     </header>
 
@@ -208,20 +215,22 @@
     </div>
 </section>
 
-<section id="vb-alaram">
+<section id="vb-alert">
     <div class="container-fluid">
         <img src="./assets/images/alert.png" alt="">
         <div class="text-container">
             <h2>Vaccine Alert </h2>
             <p>
-                A new Vaccine Alarm feature has been integrated in to Vaccine Bell. This feature is meant for those users who don't want to register in Vaccine Bell, but still need to receive vaccine notification.
+                A new Vaccine Alert feature has been integrated in to Vaccine Bell. This feature is meant for those users who don't want to register in Vaccine Bell, but still need to receive vaccine notification.
 
-                To make use of this, you need to navigate to vaccine alarm page from Vaccine Bell application. There , an option is provided to choose the cities/hospitals for which you want to get notified about the vaccine availability.
+                To make use of this, you need to navigate to Vaccine Alert page from Vaccine Bell application. There , an option is provided to choose the cities for which you want to get notified about the vaccine availability.
                 
-                Once it's done, you will get notified via the browser whenever vaccine is available at the selected cities/hospitals, until the browser tab is closed. You don't need to keep the tab always active. You will still receive notifications even if the browser is running in the background.
+                Once it's done, you will get notified via the browser whenever vaccine is available at the selected cities, until the browser tab is closed. 
+                You will still receive notifications even if the browser is running in the background.
                 
                 This feature is available for both the PC and mobile phone    
             </p>
+            <a class="btn btn-flat" href="/alert.html">🔔 VB Alert</a>
         </div>
     </div>
 </section>

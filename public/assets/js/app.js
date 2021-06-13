@@ -1,16 +1,13 @@
 import {WhatsAppGroups} from './whatsapp-groups.js';
-const stateAPI = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
-const districtAPI =
-  "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
-const hospitalAPI =
-  "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict";
-const registerAPI = "api/users";
+import {comboxInit} from './combox.js';
+import {stateAPI , districtAPI ,  registerAPI } from './const.js';
+
+
 const stateControl = document.querySelector("#state");
 let states = [];
 let selctedState;
 
 const districtCombox = document.querySelector("#districts");
-// const hospitalCombox = document.querySelector("#hospitals");
 const registerBtn = document.getElementById("register");
 const registerGrp = document.getElementById("register-action");
 const emailControl = document.getElementById("emailid");
@@ -18,17 +15,13 @@ const mobileControl = document.getElementById("mobile");
 const whatsappControl = document.getElementById("whatsapp");
 const whatsappGrps = document.getElementById("whatsapp-grps");
 const emailCheckControl = document.getElementById("email");
-const smsControl = document.getElementById("sms");
 const locationEl = document.getElementById("location");
-// const hospitalGrpEl = document.getElementById("hospital-grp");
-const mobileGrpEl = document.getElementById("mobile-grp");
 const emailGrpEl = document.getElementById("email-grp");
 const registerForm = document.getElementById("register-form");
 let isEmailValid = false;
 let isMobileValid = false;
 let districts = [];
 let selctedDistricts = [];
-let hospitals = [];
 let selctedHospitals = [];
 getAllStates();
 
@@ -113,49 +106,7 @@ function getDistrictsById(id) {
     });
 }
 
-/**
- *
- * Get Hospitals
- *
- * **/
-// function getHospital(district) {
-//   let d = new Date();
-//   let DD = d.getDate() <= 9 ? "0" + d.getDate() : d.getDate();
-//   let mm = d.getMonth() + 1;
-//   let MM = mm <= 9 ? "0" + mm : mm;
-//   let YYY = d.getFullYear();
-//   API_URL = `${hospitalAPI}?district_id=${district}&date=${DD}-${MM}-${YYY}`;
 
-//   fetch(API_URL)
-//     .then((response) => response.json())
-//     .then((hospitalData) => {
-//       hospitals.push(...hospitalData.centers);
-
-//       if (hospitals && hospitals.length) {
-//         comboxInit(
-//           hospitalCombox,
-//           hospitals,
-//           {
-//             id: "center_id",
-//             name: "name",
-//             address: "address",
-//           },
-//           // Add or remove hospital
-//           (data, hospital) => {
-//             if (hospital && hospital.type === "add") {
-//               if (!selctedHospitals.includes(hospital.id)) {
-//                 selctedHospitals.push(hospital.id);
-//               }
-//             }
-//             if (hospital && hospital.type === "remove") {
-//               let i = selctedHospitals.indexOf(hospital.id);
-//               selctedHospitals.splice(i, 1);
-//             }
-//           }
-//         );
-//       }
-//     });
-// }
 
 function validate() {
   let validState = stateControl.value ? true : false;
@@ -329,173 +280,6 @@ registerBtn.onclick = (e) => {
     });
 };
 
-/**
- * Combox
- * **/
-function comboxInit(combox, collection, params, comUpdateCallback) {
-  const selectedEl = combox.children[0]; // Slector e;
-  const ctrl = combox.children[1]; // Input
-  const dropdown = combox.children[2]; // dropdown menu
-  let dropdownItems = "";
-  let selected = []; // selected
-  // reset first
-  selectedEl.innerHTML = "";
-  ctrl.value = "";
-  dropdown.innerHTML = "";
-
-  // Update dropdown
-  const updateDropdown = () => {
-    dropdownItems = "";
-    collection.forEach((item) => {
-      if (!item.disable && !item.remove) {
-        dropdownItems += `<li data-id="${item[params.id]}">
-          ${item[params.name]}
-          ${item[params.address] ? ", " + item[params.address] : ""}
-
-          </li>`;
-      }
-    });
-    dropdown.innerHTML = dropdownItems;
-
-    // Select Item from dropdown
-    const dropdownList = dropdown.children;
-    for (let i = 0; i < dropdownList.length; i++) {
-      dropdownList[i].onclick = (e) => {
-        let itemId = e.target.dataset.id;
-        let itemName = e.target.innerText;
-        e.preventDefault();
-        e.stopPropagation();
-        ctrl.value = "";
-        if (selected.findIndex((it) => it.id === itemId) === -1) {
-          updateSelection({
-            id: itemId,
-            name: itemName,
-          });
-
-          comUpdateCallback(selected, {
-            type: "add",
-            name: itemName,
-            id: itemId,
-          });
-          // Update dropdownlist
-          collection = collection.map((item) => {
-            if (item[params.id] == itemId) {
-              return { ...item, remove: true };
-            }
-            return item;
-          });
-        }
-        dropdown.classList.remove("open");
-      };
-    }
-  };
-
-  //Update Selection List
-  const updateSelection = (data) => {
-    let selectedItems = "";
-    let dataSelected = "";
-    selected.push(data);
-    selected.forEach((item) => {
-      selectedItems += `<span data-id="${item.id}" class="item">${item.name} <button class="remove"></button></span>`;
-      dataSelected += item.id + ",";
-    });
-    // update dataset attribute
-    combox.dataset.selected = dataSelected;
-
-    // Append Selected items
-    selectedEl.innerHTML = selectedItems;
-    // Remove Action
-    for (let i = 0; i < selectedEl.children.length; i++) {
-      let selectedItem = selectedEl.children[i];
-      let itemRemoveBtn = selectedItem.children[0];
-      let itemId = selectedItem.dataset.id;
-      let itemName = selectedItem.innerText;
-      itemRemoveBtn.onclick = (removeEvent) => {
-        removeEvent.preventDefault();
-        removeEvent.stopPropagation();
-        dropdown.classList.remove("open");
-        selectedItem.remove(); // remove Element
-        selected = selected.filter((sclIt) => sclIt.id !== itemId); // remove from Selected Array
-
-        comUpdateCallback(selected, {
-          type: "remove",
-          name: itemName,
-          id: itemId,
-        });
-
-        // update Date set attribute
-        dataSelected = dataSelected.replace(itemId + ",", "");
-        combox.dataset.selected = dataSelected;
-
-        collection = collection.map((item) => {
-          if (item[params.id] == itemId || !item.remove) {
-            return { ...item, remove: false };
-          }
-          return { ...item, remove: true };
-        });
-        updateDropdown();
-      };
-    }
-  };
-
-  // Combox click
-  combox.onclick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    ctrl.focus();
-    textBasedDropdownFilter(ctrl.value);
-    // Show Dropdown menu
-    document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
-      if (ddMenu !== dropdown) {
-        ddMenu.classList.remove('open');
-      } else{
-        dropdown.classList.add("open");
-      }
-    });
-  };
-
-  // Typing on combox
-  ctrl.onkeyup = (e) => {
-    if(e.keyCode == 13 || e.key == 'Enter'){
-      dropdown.classList.remove("open");
-      e.target.value = '';
-    }
-    textBasedDropdownFilter(e.target.value);
-  };
-
-  const textBasedDropdownFilter = (text) => {
-    collection = collection.map((item) => {
-      if (
-        item[params.name].toLowerCase().includes(text.toLowerCase()) &&
-        !item.remove
-      ) {
-        return { ...item, disable: false };
-      }
-      return { ...item, disable: true };
-    });
-    updateDropdown();
-  };
-}
-
-// get cobvalue
-
-function getComboxValue(selector) {
-  let combVal = selector.dataset.selected.split(",");
-  combVal.pop();
-  return combVal;
-}
-
-// let touchEvent = 'ontouchstart' in window ? 'touchstart ' : 'click';
-// Outside click hide dropdown
-window.addEventListener('click', (event)=>{
-  if (!event.target.matches('combox')) {
-    document.querySelectorAll('.combox-dropdown').forEach(ddMenu => {
-      if (ddMenu.classList.contains('open')) {
-        ddMenu.classList.remove('open');
-      }
-    });
-  }
-});
 
 
 // close disclaimer

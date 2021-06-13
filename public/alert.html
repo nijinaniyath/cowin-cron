@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Browser Support -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    
+    <!--SEO -->
+
+    <!-- Primary Meta Tags -->
+    <title>Vaccine Bell 🔔</title>
+    <meta name="title" content="Vaccine Bell 🔔">
+    <meta name="description" content="Get yourself 🔔 notified about the vaccine availability near you.
+    Register using Vaccine Bell, Select your nearest hospital or center  and get the latest updates on vaccine availability through SMS, email or Whatsapp.">
+    <meta name="image" content="assets/images/vaccinebell-seo.png">
+
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="Vaccine Bell 🔔">
+    <meta itemprop="description" content="Get yourself 🔔 notified about the vaccine availability near you.     Register using Vaccine Bell, Select your nearest hospital or center  and get the latest updates on vaccine availability through SMS, email or Whatsapp.">
+    <meta itemprop="image" content="assets/images/vaccinebell-seo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vaccinebell.com/">
+    <meta property="og:title" content="Vaccine Bell 🔔">
+    <meta name="og:site_name" content="vaccinebell">
+    <meta name="og:locale" content="india">
+    <!-- <meta name="og:video" content="https://youtu.be/AMhUF3Sch1c"> -->
+    <meta name="og:type" content="website">
+    <meta property="og:description" content="Get yourself 🔔 notified about the vaccine availability near you.
+    Register using Vaccine Bell, Select your nearest hospital or center  and get the latest updates on vaccine availability through SMS, email or Whatsapp.">
+    <meta property="og:image" content="assets/images/vaccinebell-seo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vaccinebell.com/">
+    <meta property="twitter:title" content="Vaccine Bell 🔔">
+    <meta property="twitter:description" content="Get yourself 🔔 notified about the vaccine availability near you.
+    Register using Vaccine Bell, Select your nearest hospital or center  and get the latest updates on vaccine availability through SMS, email or Whatsapp.">
+    <meta property="twitter:image" content="assets/images/vaccinebell-seo.png">
+
+    <!-- SEO -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-197688192-1">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-197688192-1');
+</script>
+
+    <!-- Logs -->
+    <script src="./assets/js/log.js"></script>
+
+</head>
+<body>
+    
+    <header>
+        <div class="container-fluid  flex-center">
+            <a href="/" class="brand">
+                <img class="logo" src="./assets/images/logo-tr.png" alt="">
+                <h1>Vaccine Bell</h1>
+            </a>
+            <ul class="nav">
+                <li class="hide-mob"><a href="#mobile-app">Mobile App</a></li>
+                <li><a class="nav-btn" href="#vb-alert">🔔 VB Alert</a></li>
+                <li class="hide-mob"><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main vb-alert">
+        <div class="container ">
+
+            <div class="info-box">
+                Get Vaccine Alert in your browser whenever vaccine is available at the selected cities, 
+                until the browser tab is closed. 
+            </div>
+
+
+            <div id="alert-form">
+                <!-- States -->
+                <div class="form-group">
+                    <label>State <span class="text-danger">*</span></label>
+                    <div class="select-box">
+                        <select class="input-control"  name="state" id="state">
+                            <option selected disabled>Select Your State</option>
+                        </select>
+                    </div>
+                </div> <!-- States -->
+                
+                <div id="location" class="hide">
+
+                    <!-- districts -->
+                    <div class="form-group">
+                        <label>Districts <span class="text-danger">*</span></label>
+                        <div id="districts" class="combox">
+                            <div class="combox-selection"></div>
+                            <input autocomplete="off" type="text" class="combox-control">
+                            <ul class="combox-dropdown"></ul>
+                        </div>
+                    </div> <!-- districts -->
+
+                <!-- Filters -->
+                <div class="form-group">
+                    <label>Filter</label>
+
+                    <div class="filterbox">
+
+                        <div class="check-btn">
+                            <input id="age-18" value="18" name="min_age_limit" type="checkbox">
+                            <label for="age-18"> Age 18+ </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input id="age-45" value="45" name="min_age_limit" type="checkbox">
+                            <label for="age-45"> Age 45+ </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input id="vac-covishield" name="vaccine" value="COVISHIELD" type="checkbox">
+                            <label for="vac-covishield"> Covishield  </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input id="vac-covaxin" name="vaccine" value="COVAXIN" type="checkbox">
+                            <label for="vac-covaxin"> Covaxin   </label>
+                        </div>
+                        <div class="check-btn">
+                            <input id="vac-sputnik" name="vaccine" value="SPUTNIK V" type="checkbox">
+                            <label for="vac-sputnik">  Sputnik V </label>
+                        </div>
+                        <div class="check-btn">
+                            <input id="pt-free" name="fee_type" value="Free" type="checkbox">
+                            <label for="pt-free">  Free </label>
+                        </div>
+                        <div class="check-btn">
+                            <input id="pt-paid" name="fee_type" value="Paid" type="checkbox">
+                            <label for="pt-paid">  Paid </label>
+                        </div>
+
+
+                    </div>
+
+                </div> <!-- Filters -->
+
+
+                </div>
+
+
+                <p class="form-info">Please fill <span class="text-danger">*</span> mandatory fields.</p>
+                <button class="btn" id="start-alert" disabled> 
+                    Get Alert
+                </button>
+                
+            </div>
+
+            <div id="counter" class="hide"></div>
+
+            <button class="btn hide" id="stop-alert" > 
+                Stop Alert
+            </button>
+        </div>
+
+        
+        
+    </div>
+<!-- Results -->
+<section class="hide" id="results" >
+    <div class="container-fluid">
+        <h2>Vaccine Available </h2>
+        <div id="result-row" class="row">
+        </div>
+    </div>
+</section>
+
+
+    <section id="mobile-app">
+        <div class="container-fluid">
+            <div class="phone"></div>
+            <div class="text-container">
+                <h2>Get vaccine availability notification on phone.</h2>
+                <p>
+                    Vaccine Bell is now available as mobile app.
+                    You will get the vaccine availability notification without registering to the same.
+                    Install Vaccine Bell on you mobile,
+                    Select districts/hospitals convenient for you.
+                    Get notified about vaccine availability instantly.
+                </p>
+                <p class="flex">Download : <a class="gplay" href="https://play.google.com/store/apps/details?id=com.anshad.vaccinebell&utm_source=vaccinebell_website" target="_self"></a> </p>
+            </div>
+        </div>
+    </section>
+
+
+<!-- If Javascript disabled -->
+<noscript>
+    <div class="no-js">
+        <h2 class="text-danger">{js}</h2>
+        <h3>JavaScript disabled</h3>
+        
+        <hr>
+        <div class="container">
+            <span class="text-danger"> JavaScript is disabled </span>
+            on your browser. To use <b><img class="logo" src="./assets/images/favicon-32x32.png" alt=""> Vaccine Bell</b>, please enable JavaScript
+            or upgrade to a JavaScript capable browser 
+        </div>
+    </div>
+</noscript>
+<!-- If Javascript disabled -->
+
+
+
+
+    <footer>
+        <a href="mailto:vaccinebell@gmail.com">✉️Get Support</a>
+    </footer>
+
+    <script type="module" src="./assets/js/alert.js"></script>
+
+    <audio id="audio-player" src="./assets/audio/clapping.wav"></audio>
+    <audio id="audio-bell" src="./assets/audio/bells.wav"></audio>
+</body>
+</html>
