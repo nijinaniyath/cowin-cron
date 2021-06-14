@@ -6,8 +6,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Alappuzha-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Alappuzha',
+                link: 'https://chat.whatsapp.com/FNFliijTmHlJfBbO5LZjGe'
             }
         ]
     },
@@ -18,8 +18,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Ernakulam-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Ernakulam',
+                link: 'https://chat.whatsapp.com/DrDHVt111NWEFKbKbiFMRm'
             }
         ]
     },
@@ -30,8 +30,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Idukki-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Idukki',
+                link: 'https://chat.whatsapp.com/KQKpt8X9gyy44WRBZe42wL'
             }
         ]
     },
@@ -42,8 +42,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Kannur-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Kannur',
+                link: 'https://chat.whatsapp.com/DYrO3HJWIcQ7J2bZkXZBUW'
             }
         ]
     },
@@ -54,8 +54,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Kasaragod-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Kasaragod',
+                link: 'https://chat.whatsapp.com/L9i9BIP4UH2JLPLF5KMu73'
             }
         ]
     },
@@ -66,8 +66,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Kollam-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Kollam',
+                link: 'https://chat.whatsapp.com/H96Ro45N5ED29rlSbrKHhg'
             }
         ]
     },
@@ -78,8 +78,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Kottayam-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Kottayam',
+                link: 'https://chat.whatsapp.com/D3YBWg8dUNwCiTV5Wp5juA'
             }
         ]
     },
@@ -90,8 +90,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Kozhikode-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Kozhikode',
+                link: 'https://chat.whatsapp.com/LOOsUon6FOp71PrIZmp5Z5'
             }
         ]
     },
@@ -102,8 +102,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Malappuram-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Malappuram',
+                link: 'https://chat.whatsapp.com/LDyHLmv0uRd0Tr3WTsKuAA'
             }
         ]
     },
@@ -114,8 +114,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Palakkad-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Palakkad',
+                link: 'https://chat.whatsapp.com/KPdA8jubqFhEjMvqEKQgmt'
             }
         ]
     },
@@ -126,8 +126,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Pathanamthitta-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Pathanamthitta',
+                link: 'https://chat.whatsapp.com/L6bbYViJfOsEmOCXVBuJSU'
             }
         ]
     },
@@ -138,8 +138,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Thiruvananthapuram-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Thiruvananthapuram',
+                link: 'https://chat.whatsapp.com/EslWVAqOo4NHuyfHlLcB6P'
             }
         ]
     },
@@ -150,8 +150,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Thrissur-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Thrissur',
+                link: 'https://chat.whatsapp.com/IrQaNhrObEZ5fVYpzSGwYv'
             }
         ]
     },
@@ -162,8 +162,8 @@ export const  WhatsAppGroups  = [
         stateId: 17,
         groups: [
             {
-                name: 'VB-Wayanad-1',
-                link: 'https://chat.whatsapp.com/F3ES5eBbN134VgmkRNuaGa'
+                name: 'VB-Wayanad',
+                link: 'https://chat.whatsapp.com/DmBwDgaL7ItCpx2pXpITO1'
             }
         ]
     },
