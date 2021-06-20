@@ -50,6 +50,7 @@ header .container-fluid {
 header .brand {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 header .brand img {
@@ -64,6 +65,7 @@ header .brand h1 {
   display: inline-block;
   margin: 0;
   color: #fff;
+  text-decoration: none;
 }
 
 @media (max-width: 640px) {
@@ -91,6 +93,7 @@ header .nav li a {
   color: #fff;
   padding: 3px 5px;
   font-size: 1.2rem;
+  text-decoration: none;
 }
 
 header .nav li a.nav-btn {
